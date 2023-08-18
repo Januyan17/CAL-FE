@@ -355,10 +355,18 @@ function Profile() {
       }
       setProfileData(profileData);
 
-      let clubArray = profileData.clubs.map((club) => ({ ...club }));
-      let selfLearning = profileData.selflearnings.map((club) => ({ ...club }));
-      let events = profileData.events.map((club) => ({ ...club }));
-      let sports = profileData.sports.map((club) => ({ ...club }));
+      let clubArray = profileData?.clubs
+        ? profileData.clubs.map((club) => ({ ...club }))
+        : [];
+      let selfLearning = profileData?.selflearnings
+        ? profileData.selflearnings.map((club) => ({ ...club }))
+        : [];
+      let events = profileData?.events
+        ? profileData.events.map((club) => ({ ...club }))
+        : [];
+      let sports = profileData?.sports
+        ? profileData?.sports.map((club) => ({ ...club }))
+        : [];
 
       setClubData(clubArray);
       setSelfLearningData(selfLearning);
