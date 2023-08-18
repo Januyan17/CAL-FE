@@ -11,78 +11,152 @@
 */
 
 // import { useState } from "react";
-import { Menu, Button } from "antd";
-import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import { Menu, Button } from 'antd';
+import { NavLink, useLocation } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
+import { useSelector } from 'react-redux';
 
 function Sidenav({ color }) {
   const { pathname } = useLocation();
-  const page = pathname.replace("/", "");
+  const page = pathname.replace('/', '');
+  const role = useSelector((state) => state?.commonReducer?.roleCode);
 
   const dashboard = [
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      width="94"
+      height="85"
+      viewBox="0 0 94 85"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      key={0}
     >
-      <path
-        d="M3 4C3 3.44772 3.44772 3 4 3H16C16.5523 3 17 3.44772 17 4V6C17 6.55228 16.5523 7 16 7H4C3.44772 7 3 6.55228 3 6V4Z"
-        fill={color}
-      ></path>
-      <path
-        d="M3 10C3 9.44771 3.44772 9 4 9H10C10.5523 9 11 9.44771 11 10V16C11 16.5523 10.5523 17 10 17H4C3.44772 17 3 16.5523 3 16V10Z"
-        fill={color}
-      ></path>
-      <path
-        d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z"
-        fill={color}
-      ></path>
+      <g filter="url(#filter0_d_306_1015)">
+        <path
+          d="M66.1391 34.792L52.2948 24.6693C49.5893 22.6988 45.362 22.6795 42.6777 24.65L28.8334 34.792C26.8466 36.2409 25.6418 39.1386 26.0645 41.4182L28.7277 55.9841C29.3407 59.2488 32.6591 61.8182 36.2734 61.8182H58.6779C62.25 61.8182 65.6318 59.1909 66.2448 55.9648L68.9079 41.3988C69.2884 39.1386 68.0836 36.2409 66.1391 34.792ZM49.0609 54.0909C49.0609 54.8829 48.3423 55.5398 47.4757 55.5398C46.6091 55.5398 45.8904 54.8829 45.8904 54.0909V48.2954C45.8904 47.5034 46.6091 46.8466 47.4757 46.8466C48.3423 46.8466 49.0609 47.5034 49.0609 48.2954V54.0909Z"
+          fill="url(#paint0_linear_306_1015)"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_306_1015"
+          x="9.98022"
+          y="12.1818"
+          width="74.9978"
+          height="70.6364"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="5" />
+          <feGaussianBlur stdDeviation="8" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.368627 0 0 0 0 0.835294 0 0 0 0 0.658824 0 0 0 0.25 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_306_1015"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_306_1015"
+            result="shape"
+          />
+        </filter>
+        <linearGradient
+          id="paint0_linear_306_1015"
+          x1="47.4791"
+          y1="23.1818"
+          x2="47.4791"
+          y2="61.8182"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#061888" />
+          <stop offset="0.732292" stop-color="#5D8EF9" />
+          <stop offset="1" stop-color="#8DF4F4" />
+        </linearGradient>
+      </defs>
     </svg>,
   ];
 
-  const tables = [
+  const performance = [
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      key={0}
     >
       <path
-        d="M9 2C8.44772 2 8 2.44772 8 3C8 3.55228 8.44772 4 9 4H11C11.5523 4 12 3.55228 12 3C12 2.44772 11.5523 2 11 2H9Z"
-        fill={color}
-      ></path>
+        d="M16.25 0C14.1789 0 12.5 1.67893 12.5 3.75V6.25C12.5 8.32107 14.1789 10 16.25 10H23.75C25.8211 10 27.5 8.32107 27.5 6.25V3.75C27.5 1.67893 25.8211 0 23.75 0H16.25ZM23.75 2.5C24.4404 2.5 25 3.05964 25 3.75V6.25C25 6.94036 24.4404 7.5 23.75 7.5H16.25C15.5596 7.5 15 6.94036 15 6.25V3.75C15 3.05964 15.5596 2.5 16.25 2.5H23.75Z"
+        fill="url(#paint0_linear_310_1175)"
+      />
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M4 5C4 3.89543 4.89543 3 6 3C6 4.65685 7.34315 6 9 6H11C12.6569 6 14 4.65685 14 3C15.1046 3 16 3.89543 16 5V16C16 17.1046 15.1046 18 14 18H6C4.89543 18 4 17.1046 4 16V5ZM7 9C6.44772 9 6 9.44772 6 10C6 10.5523 6.44772 11 7 11H7.01C7.56228 11 8.01 10.5523 8.01 10C8.01 9.44772 7.56228 9 7.01 9H7ZM10 9C9.44772 9 9 9.44772 9 10C9 10.5523 9.44772 11 10 11H13C13.5523 11 14 10.5523 14 10C14 9.44772 13.5523 9 13 9H10ZM7 13C6.44772 13 6 13.4477 6 14C6 14.5523 6.44772 15 7 15H7.01C7.56228 15 8.01 14.5523 8.01 14C8.01 13.4477 7.56228 13 7.01 13H7ZM10 13C9.44772 13 9 13.4477 9 14C9 14.5523 9.44772 15 10 15H13C13.5523 15 14 14.5523 14 14C14 13.4477 13.5523 13 13 13H10Z"
-        fill={color}
-      ></path>
+        d="M10 3.75H7.5C4.73858 3.75 2.5 5.98857 2.5 8.75V35C2.5 37.7614 4.73858 40 7.5 40H32.5C35.2614 40 37.5 37.7614 37.5 35V8.75C37.5 5.98858 35.2614 3.75 32.5 3.75H30V6.25C30 9.70178 27.2018 12.5 23.75 12.5H16.25C12.7982 12.5 10 9.70178 10 6.25V3.75ZM27.1339 22.1339L19.6339 29.6339C19.3995 29.8683 19.0815 30 18.75 30C18.4185 30 18.1005 29.8683 17.8661 29.6339L14.1161 25.8839C13.628 25.3957 13.628 24.6043 14.1161 24.1161C14.6043 23.628 15.3957 23.628 15.8839 24.1161L18.75 26.9822L25.3661 20.3661C25.8543 19.878 26.6457 19.878 27.1339 20.3661C27.622 20.8543 27.622 21.6457 27.1339 22.1339Z"
+        fill="url(#paint1_linear_310_1175)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_310_1175"
+          x1="20"
+          y1="0"
+          x2="20"
+          y2="40"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#070C83" />
+          <stop offset="1" stop-color="#8DF4F4" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear_310_1175"
+          x1="20"
+          y1="0"
+          x2="20"
+          y2="40"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#070C83" />
+          <stop offset="1" stop-color="#8DF4F4" />
+        </linearGradient>
+      </defs>
     </svg>,
   ];
 
-  const billing = [
+  const Analyze = [
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      key={0}
     >
       <path
-        d="M4 4C2.89543 4 2 4.89543 2 6V7H18V6C18 4.89543 17.1046 4 16 4H4Z"
-        fill={color}
-      ></path>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M18 9H2V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V9ZM4 13C4 12.4477 4.44772 12 5 12H6C6.55228 12 7 12.4477 7 13C7 13.5523 6.55228 14 6 14H5C4.44772 14 4 13.5523 4 13ZM9 12C8.44772 12 8 12.4477 8 13C8 13.5523 8.44772 14 9 14H10C10.5523 14 11 13.5523 11 13C11 12.4477 10.5523 12 10 12H9Z"
-        fill={color}
-      ></path>
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 0H2.25V33.75H36V36H0V0ZM22.5 7.875C22.5 7.25368 23.0037 6.75 23.625 6.75H32.625C33.2463 6.75 33.75 7.25368 33.75 7.875V16.875C33.75 17.4963 33.2463 18 32.625 18C32.0037 18 31.5 17.4963 31.5 16.875V11.0266L23.3707 20.9624C23.1694 21.2084 22.8735 21.3578 22.556 21.3736C22.2386 21.3894 21.9293 21.2702 21.7045 21.0455L15.8855 15.2264L7.65983 26.5367C7.29438 27.0392 6.59079 27.1503 6.08831 26.7848C5.58582 26.4194 5.47473 25.7158 5.84017 25.2133L14.8402 12.8383C15.0337 12.5722 15.334 12.4042 15.662 12.3784C15.99 12.3527 16.3128 12.4719 16.5455 12.7045L22.4165 18.5755L30.251 9H23.625C23.0037 9 22.5 8.49632 22.5 7.875Z"
+        fill="url(#paint0_linear_310_1173)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_310_1173"
+          x1="18"
+          y1="0"
+          x2="18"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#070C83" />
+          <stop offset="1" stop-color="#8DF4F4" />
+        </linearGradient>
+      </defs>
     </svg>,
   ];
 
@@ -160,11 +234,38 @@ function Sidenav({ color }) {
     </svg>,
   ];
 
+  const analyzeStudents = [
+    <svg
+      width="35"
+      height="35"
+      viewBox="0 0 35 35"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M24.0625 4.375C24.0625 3.16688 25.0419 2.1875 26.25 2.1875H30.625C31.8331 2.1875 32.8125 3.16688 32.8125 4.375V30.625H33.9062C34.5103 30.625 35 31.1147 35 31.7188C35 32.3228 34.5103 32.8125 33.9062 32.8125H1.09375C0.489689 32.8125 0 32.3228 0 31.7188C0 31.1147 0.489689 30.625 1.09375 30.625H2.1875V24.0625C2.1875 22.8544 3.16688 21.875 4.375 21.875H8.75C9.95812 21.875 10.9375 22.8544 10.9375 24.0625V30.625H13.125V15.3125C13.125 14.1044 14.1044 13.125 15.3125 13.125H19.6875C20.8956 13.125 21.875 14.1044 21.875 15.3125V30.625H24.0625V4.375Z"
+        fill="url(#paint0_linear_268_863)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_268_863"
+          x1="17.5"
+          y1="2.1875"
+          x2="17.5"
+          y2="32.8125"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#070C83" />
+          <stop offset="1" stop-color="#69D0F0" stop-opacity="0.81" />
+        </linearGradient>
+      </defs>
+    </svg>,
+  ];
   return (
     <>
       <div className="brand">
-        <img src={logo} alt="" />
-        <span>Muse Dashboard</span>
+        {/* <img src={logo} alt="" />
+        <span>Muse Dashboard</span> */}
       </div>
       <hr />
       <Menu theme="light" mode="inline">
@@ -173,7 +274,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === "dashboard" ? color : "",
+                background: page === 'dashboard' ? color : '',
               }}
             >
               {dashboard}
@@ -181,45 +282,112 @@ function Sidenav({ color }) {
             <span className="label">Dashboard</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="2">
+
+        {role === 'CAREER_GUIDANCE_OFFICER' ? (
+          <Menu.Item key="1">
+            <NavLink to="/checkPerformance">
+              <span
+                className="icon"
+                style={{
+                  background: page === 'dashboard' ? color : '',
+                }}
+              >
+                {Analyze}
+              </span>
+              <span className="label">Performance Report</span>
+            </NavLink>
+          </Menu.Item>
+        ) : (
+          <></>
+        )}
+        {/* <Menu.Item key="2">
           <NavLink to="/tables">
             <span
               className="icon"
               style={{
-                background: page === "tables" ? color : "",
+                background: page === 'tables' ? color : '',
               }}
             >
-              {tables}
+              {performance}
             </span>
-            <span className="label">Tables</span>
+            <span className="label">Performance</span>
+          </NavLink>
+        </Menu.Item> */}
+
+        {role === 'CAREER_GUIDANCE_OFFICER' ? (
+          <Menu.Item key="7">
+            <NavLink to="/advertisement">
+              <span
+                className="icon"
+                style={{
+                  background: page === 'tables' ? color : '',
+                }}
+              >
+                {performance}
+              </span>
+              <span className="label">Advertisement</span>
+            </NavLink>
+          </Menu.Item>
+        ) : (
+          <></>
+        )}
+
+        {role === 'STUDENT' ? (
+          <Menu.Item key="8">
+            <NavLink to="/performance">
+              <span
+                className="icon"
+                style={{
+                  background: page === 'tables' ? color : '',
+                }}
+              >
+                {performance}
+              </span>
+              <span className="label">Performance</span>
+            </NavLink>
+          </Menu.Item>
+        ) : (
+          <></>
+        )}
+        <Menu.Item key="9">
+          <NavLink to="/analyzeStudentPerformance">
+            <span
+              className="icon"
+              style={{
+                background: page === 'tables' ? color : '',
+              }}
+            >
+              {analyzeStudents}
+            </span>
+            <span className="label">Analyze Students</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="3">
+        {/* <Menu.Item key="3">
           <NavLink to="/billing">
             <span
               className="icon"
               style={{
-                background: page === "billing" ? color : "",
+                background: page === 'billing' ? color : '',
               }}
             >
-              {billing}
+              {Analyze}
             </span>
-            <span className="label">Billing</span>
+            <span className="label">Analyze</span>
           </NavLink>
-        </Menu.Item>
-        <Menu.Item key="4">
+        </Menu.Item> */}
+        {/* <Menu.Item key="4">
           <NavLink to="/rtl">
             <span
               className="icon"
               style={{
-                background: page === "rtl" ? color : "",
+                background: page === 'rtl' ? color : '',
               }}
             >
               {rtl}
             </span>
             <span className="label">RTL</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item className="menu-item-header" key="5">
           Account Pages
         </Menu.Item>
@@ -228,7 +396,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === "profile" ? color : "",
+                background: page === 'profile' ? color : '',
               }}
             >
               {profile}
@@ -236,20 +404,20 @@ function Sidenav({ color }) {
             <span className="label">Profile</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="7">
+        {/* <Menu.Item key="7">
           <NavLink to="/sign-in">
             <span className="icon">{signin}</span>
             <span className="label">Sign In</span>
           </NavLink>
-        </Menu.Item>
-        <Menu.Item key="8">
+        </Menu.Item> */}
+        {/* <Menu.Item key="8">
           <NavLink to="/sign-up">
             <span className="icon">{signup}</span>
             <span className="label">Sign Up</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
-      <div className="aside-footer">
+      {/* <div className="aside-footer">
         <div
           className="footer-box"
           style={{
@@ -265,7 +433,7 @@ function Sidenav({ color }) {
             DOCUMENTATION
           </Button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

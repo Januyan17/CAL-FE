@@ -10,7 +10,7 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 import {
   Row,
@@ -25,18 +25,22 @@ import {
   Drawer,
   Typography,
   Switch,
-} from "antd";
+} from 'antd';
 
 import {
   SearchOutlined,
   StarOutlined,
   TwitterOutlined,
   FacebookFilled,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import { NavLink, Link } from "react-router-dom";
-import styled from "styled-components";
-import avtar from "../../assets/images/team-2.jpg";
+import { NavLink, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import avtar from '../../assets/images/team-2.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt from 'jwt-decode';
+import Swal from 'sweetalert2';
+import { signOut } from '../../redux/action';
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -147,19 +151,19 @@ const clockicon = [
 
 const data = [
   {
-    title: "New message from Sophie",
+    title: 'New message from Sophie',
     description: <>{clockicon} 2 days ago</>,
 
     avatar: avtar,
   },
   {
-    title: "New album by Travis Scott",
+    title: 'New album by Travis Scott',
     description: <>{clockicon} 2 days ago</>,
 
     avatar: <Avatar shape="square">{wifi}</Avatar>,
   },
   {
-    title: "Payment completed",
+    title: 'Payment completed',
     description: <>{clockicon} 2 days ago</>,
     avatar: <Avatar shape="square">{credit}</Avatar>,
   },
@@ -261,12 +265,38 @@ function Header({
   const { Title, Text } = Typography;
 
   const [visible, setVisible] = useState(false);
-  const [sidenavType, setSidenavType] = useState("transparent");
+  const [sidenavType, setSidenavType] = useState('transparent');
 
   useEffect(() => window.scrollTo(0, 0));
 
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
+
+  const siginStatusCode = useSelector(
+    (state) => state?.commonReducer?.siginStatusCode
+  );
+
+  const tokenDecoded =
+    siginStatusCode === 200 ? jwt(localStorage.getItem('token')) : '';
+
+  const dispatch = useDispatch();
+  const signOutFunc = () => {
+    Swal.fire({
+      title: 'Are you want to leave the application ',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.setItem('token', '');
+        localStorage.clear();
+        signOut(dispatch);
+      }
+    });
+  };
 
   return (
     <>
@@ -276,25 +306,25 @@ function Header({
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
           <Breadcrumb>
-            <Breadcrumb.Item>
+            {/* <Breadcrumb.Item>
               <NavLink to="/">Pages</NavLink>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item style={{ textTransform: "capitalize" }}>
-              {name.replace("/", "")}
-            </Breadcrumb.Item>
+            </Breadcrumb.Item> */}
+            {/* <Breadcrumb.Item style={{ textTransform: 'capitalize' }}>
+              {name.replace('/', '')}
+            </Breadcrumb.Item> */}
           </Breadcrumb>
           <div className="ant-page-header-heading">
             <span
               className="ant-page-header-heading-title"
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: 'capitalize' }}
             >
-              {subName.replace("/", "")}
+              {subName.replace('/', '')}
             </span>
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
           <Badge size="small" count={4}>
-            <Dropdown overlay={menu} trigger={["click"]}>
+            <Dropdown overlay={menu} trigger={['click']}>
               <a
                 href="#pablo"
                 className="ant-dropdown-link"
@@ -304,9 +334,9 @@ function Header({
               </a>
             </Dropdown>
           </Badge>
-          <Button type="link" onClick={showDrawer}>
+          {/* <Button type="link" onClick={showDrawer}>
             {logsetting}
-          </Button>
+          </Button> */}
           <Button
             type="link"
             className="sidebar-toggler"
@@ -314,7 +344,7 @@ function Header({
           >
             {toggler}
           </Button>
-          <Drawer
+          {/* <Drawer
             className="settings-drawer"
             mask={true}
             width={360}
@@ -336,32 +366,32 @@ function Header({
                   <ButtonContainer>
                     <Button
                       type="primary"
-                      onClick={() => handleSidenavColor("#1890ff")}
+                      onClick={() => handleSidenavColor('#1890ff')}
                     >
                       1
                     </Button>
                     <Button
                       type="success"
-                      onClick={() => handleSidenavColor("#52c41a")}
+                      onClick={() => handleSidenavColor('#52c41a')}
                     >
                       1
                     </Button>
                     <Button
                       type="danger"
-                      onClick={() => handleSidenavColor("#d9363e")}
+                      onClick={() => handleSidenavColor('#d9363e')}
                     >
                       1
                     </Button>
                     <Button
                       type="yellow"
-                      onClick={() => handleSidenavColor("#fadb14")}
+                      onClick={() => handleSidenavColor('#fadb14')}
                     >
                       1
                     </Button>
 
                     <Button
                       type="black"
-                      onClick={() => handleSidenavColor("#111")}
+                      onClick={() => handleSidenavColor('#111')}
                     >
                       1
                     </Button>
@@ -373,19 +403,19 @@ function Header({
                   <Text>Choose between 2 different sidenav types.</Text>
                   <ButtonContainer className="trans">
                     <Button
-                      type={sidenavType === "transparent" ? "primary" : "white"}
+                      type={sidenavType === 'transparent' ? 'primary' : 'white'}
                       onClick={() => {
-                        handleSidenavType("transparent");
-                        setSidenavType("transparent");
+                        handleSidenavType('transparent');
+                        setSidenavType('transparent');
                       }}
                     >
                       TRANSPARENT
                     </Button>
                     <Button
-                      type={sidenavType === "white" ? "primary" : "white"}
+                      type={sidenavType === 'white' ? 'primary' : 'white'}
                       onClick={() => {
-                        handleSidenavType("#fff");
-                        setSidenavType("white");
+                        handleSidenavType('#fff');
+                        setSidenavType('white');
                       }}
                     >
                       WHITE
@@ -420,16 +450,23 @@ function Header({
                 </div>
               </div>
             </div>
-          </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
+          </Drawer> */}
+          <div
+            style={{ cursor: 'pointer' }}
+            className="btn-sign-in"
+            onClick={signOutFunc}
+          >
             {profile}
-            <span>Sign in</span>
-          </Link>
-          <Input
+            <span>Sign out</span>
+          </div>
+          <span style={{ fontWeight: 600 }}>{`Hey ${
+            tokenDecoded?.sub?.first_name || ''
+          } !`}</span>
+          {/* <Input
             className="header-search"
             placeholder="Type here..."
             prefix={<SearchOutlined />}
-          />
+          /> */}
         </Col>
       </Row>
     </>
