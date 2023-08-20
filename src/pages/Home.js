@@ -439,12 +439,14 @@ function Home() {
               <div className="project-ant">
                 <div>
                   <Title level={5}>Upcoming Events</Title>
-                  <Paragraph className="lastweek">
-                    for Date{' '}
-                    {selectedDay == 'Invalid Date'
-                      ? moment(new Date()).format('YYYY-MM-DD')
-                      : moment(selectedDay).format('YYYY-MM-DD')}
-                  </Paragraph>
+
+                  {selectedDay == 'Invalid Date' ? (
+                    <></>
+                  ) : (
+                    <Paragraph className="lastweek">
+                      for Date {moment(selectedDay).format('YYYY-MM-DD')}
+                    </Paragraph>
+                  )}
                 </div>
                 {/* <div className="ant-filtertabs">
                   <div className="antd-pro-pages-dashboard-analysis-style-salesExtra">
@@ -499,10 +501,10 @@ function Home() {
                   {' '}
                   &ensp;&ensp;&ensp;{' '}
                   <b>
-                    Oops seems like there is no events on&ensp;
                     {selectedDay == 'Invalid Date'
-                      ? moment(new Date()).format('YYYY-MM-DD')
-                      : moment(selectedDay).format('YYYY-MM-DD')}
+                      ? 'Oops seems like there is no events '
+                      : 'Oops seems like there is no events on' +
+                        moment(selectedDay).format('YYYY-MM-DD')}
                   </b>
                 </>
               )}

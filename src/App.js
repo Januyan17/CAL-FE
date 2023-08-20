@@ -41,8 +41,6 @@ function App() {
 
   const role = useSelector((state) => state?.commonReducer?.roleCode);
 
-  console.log(siginStatusCode, 'code>>>>');
-
   return (
     <div className="App">
       <Router>

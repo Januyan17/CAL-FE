@@ -18,7 +18,9 @@ import { intializeStudDetails, submitGPAData } from '../../redux/action';
 import jwt from 'jwt-decode';
 
 const GpaEdit = ({ score }) => {
-  console.log(score, 'score');
+  const profileData = useSelector(
+    (state) => state?.studentReducer?.profileData
+  );
   const siginStatusCode = useSelector(
     (state) => state?.commonReducer?.siginStatusCode
   );
@@ -32,7 +34,7 @@ const GpaEdit = ({ score }) => {
     (state) => state?.studentDetailReducer?.gpaStatus
   );
   useEffect(() => {
-    setName(score.toString());
+    setName((profileData.gpas[0]?.value).toString() || '');
     intializeStudDetails(dispatch);
   }, []);
 

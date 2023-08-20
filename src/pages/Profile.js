@@ -67,6 +67,15 @@ function Profile() {
   const [clubData, setClubData] = useState([]);
   const [selfLearningData, setSelfLearningData] = useState([]);
   const [sportData, setSportData] = useState([]);
+  const [selectedClub, setSelectedClub] = useState([]);
+  const [clubModal, setClubModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+  const [selfModal, setSelfModal] = useState(false);
+
+  const [sportModal, setSportModal] = useState(false);
+  const [selectedEventData, setSelectedEvent] = useState([]);
+  const [selectedSportData, setSelectedSport] = useState([]);
+  const [SelectedSelfLearning, serSelectedSelfLearning] = useState([]);
 
   const [eventData, setEventData] = useState([]);
 
@@ -792,6 +801,862 @@ function Profile() {
         </Row>
       </Card> */}
 
+      <Modal
+        visible={clubModal}
+        footer={null}
+        width={600}
+        onCancel={() => {
+          setClubModal(false);
+          setSelectedClub([]);
+        }}
+      >
+        {' '}
+        <Card bordered={false} className="header-solid mb-24">
+          <Row gutter={[24, 24]}>
+            {/* {project.map((p, index) => (
+            <Col span={24} md={12} xl={6} key={index}>
+              <Card
+                bordered={false}
+                className="card-project"
+                cover={<img alt="example" src={p.img} />}
+              >
+                <div className="card-tag">{p.titlesub}</div>
+                <h5>{p.titile}</h5>
+                <p>{p.disciption}</p>
+                <Row gutter={[6, 0]} className="card-footer">
+                  <Col span={12}>
+                    <Button type="button">VIEW PROJECT</Button>
+                  </Col>
+                  <Col span={12} className="text-right">
+                    <Avatar.Group className="avatar-chips">
+                      <Avatar size="small" src={profilavatar} />
+                      <Avatar size="small" src={convesionImg} />
+                      <Avatar size="small" src={convesionImg2} />
+                      <Avatar size="small" src={convesionImg3} />
+                    </Avatar.Group>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))} */}
+
+            {selectedClub &&
+              selectedClub.map((p, index) => (
+                <Col span={24} md={24} xl={8} key={index}>
+                  {console.log(p, 'test')}
+
+                  <Card bordered={false} className="card-project">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '50px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Club Name
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Input
+                              onChange={(e) => {
+                                {
+                                  let clubDataVal = [...selectedClub];
+                                  clubDataVal[index].club_name = e.target.value;
+                                  setSelectedClub(clubDataVal);
+                                }
+                              }}
+                              value={p?.club_name}
+                              style={{ width: '300px' }}
+                              // onChange={(e) => setName(e.target.value)}
+                              // value={des}
+                              //   style={{ height: '150px' }}
+                              // onChange={(e) => setDesc(e.target.value)}
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ height: '20px' }}></div>
+
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '50px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Position
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '80px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Select
+                              style={{ width: '300px' }}
+                              defaultValue="member"
+                              onChange={(e) => {
+                                {
+                                  let clubDataVal = [...selectedClub];
+                                  clubDataVal[index].club_level = e;
+                                  setSelectedClub(clubDataVal);
+                                }
+                              }}
+                              value={p?.club_level}
+                              options={[
+                                { value: 'president', label: 'president' },
+                                { value: 'lead', label: 'lead' },
+                                { value: 'member', label: 'member' },
+                              ]}
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ height: '20px' }}></div>
+
+                    <div style={{ height: '20px' }}></div>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '40px' }}></div>
+                          </td>
+                          {/* <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Select a File
+                            </span>
+                          </td> */}
+                          {/* <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td> */}
+
+                          {/* <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Dragger
+                              fileList={fileVal}
+                              maxCount={1}
+                              multiple={false}
+                              onChange={handleFile}
+                              customRequest={dummyRequest}
+                              //   onChange={handleFile}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p
+                                className="ant-upload-text"
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '10px',
+                                }}
+                              >
+                                Click or drag file to this area to upload
+                              </p>
+                            </Dragger>
+                          </td> */}
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            {profileDataValue &&
+                              selectedClub &&
+                              !(
+                                selectedClub[index].club_name == '' ||
+                                selectedClub[index].club_level == ''
+                              ) && (
+                                <td style={{ textAlign: 'left' }}>
+                                  <Button
+                                    onClick={(e) => {
+                                      updateStu(
+                                        {
+                                          type: 'CLUBS',
+                                          club_level: p.club_level,
+                                          club_name: p.club_name,
+                                          id: p.id,
+                                        },
+                                        dispatch
+                                      );
+                                    }}
+                                    style={{
+                                      background:
+                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                      border: 'none',
+                                      color: 'white',
+                                      width: '150px',
+                                    }}
+                                  >
+                                    Update
+                                  </Button>
+                                </td>
+                              )}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </Card>
+                </Col>
+              ))}
+          </Row>
+        </Card>
+      </Modal>
+
+      {eventData && eventData?.length ? (
+        <Card
+          bordered={false}
+          className="header-solid mb-24"
+          title={
+            <>
+              <h6 className="font-semibold">Events</h6>
+              {/* <p>Architects design houses</p> */}
+            </>
+          }
+        >
+          <Row gutter={[24, 24]}>
+            {/* {project.map((p, index) => (
+            <Col span={24} md={12} xl={6} key={index}>
+              <Card
+                bordered={false}
+                className="card-project"
+                cover={<img alt="example" src={p.img} />}
+              >
+                <div className="card-tag">{p.titlesub}</div>
+                <h5>{p.titile}</h5>
+                <p>{p.disciption}</p>
+                <Row gutter={[6, 0]} className="card-footer">
+                  <Col span={12}>
+                    <Button type="button">VIEW PROJECT</Button>
+                  </Col>
+                  <Col span={12} className="text-right">
+                    <Avatar.Group className="avatar-chips">
+                      <Avatar size="small" src={profilavatar} />
+                      <Avatar size="small" src={convesionImg} />
+                      <Avatar size="small" src={convesionImg2} />
+                      <Avatar size="small" src={convesionImg3} />
+                    </Avatar.Group>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))} */}
+
+            {eventData &&
+              eventData.map((p, index) => (
+                <Col span={24} md={24} xl={8} key={index}>
+                  <Card bordered={false} className="card-project">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '50px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Name
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <span>{p?.event_name}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ height: '20px' }}></div>
+
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '50px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Level
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '100px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <span>{p?.level}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ height: '20px' }}></div>
+
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '50px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              position
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '80px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <span>{p?.position}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ height: '20px' }}></div>
+
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '30px' }}></div>
+                          </td>
+                          <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Cardinality
+                            </span>
+                          </td>
+                          <td>
+                            <div style={{ width: '80px' }}></div>
+                          </td>
+
+                          <td style={{ textAlign: 'left', width: '600px' }}>
+                            <span>{p?.cardinality}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div style={{ height: '20px' }}></div>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style={{ width: '40px' }}></div>
+                          </td>
+                          {/* <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Select a File
+                            </span>
+                          </td> */}
+                          {/* <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td> */}
+
+                          {/* <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Dragger
+                              fileList={fileVal}
+                              maxCount={1}
+                              multiple={false}
+                              onChange={handleFile}
+                              customRequest={dummyRequest}
+                              //   onChange={handleFile}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p
+                                className="ant-upload-text"
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '10px',
+                                }}
+                              >
+                                Click or drag file to this area to upload
+                              </p>
+                            </Dragger>
+                          </td> */}
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left' }}>
+                              <Button
+                                onClick={(e) => {
+                                  let events = profileData?.events
+                                    ? profileData.events.map((club) => ({
+                                        ...club,
+                                      }))
+                                    : [];
+                                  let arr = [];
+                                  arr.push(events[index]);
+                                  setSelectedEvent(arr);
+                                  setEventModal(true);
+                                }}
+                                style={{
+                                  background:
+                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                  border: 'none',
+                                  color: 'white',
+                                  width: '100px',
+                                }}
+                              >
+                                Update
+                              </Button>
+                            </td>
+
+                            <td>
+                              <div style={{ width: '20px' }}></div>
+                            </td>
+                            <td>
+                              <Button
+                                onClick={() =>
+                                  deleteStu(
+                                    {
+                                      type: 'EVENT',
+                                      id: p.id,
+                                    },
+                                    dispatch
+                                  )
+                                }
+                              >
+                                Remove
+                              </Button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </Card>
+                </Col>
+              ))}
+          </Row>
+        </Card>
+      ) : (
+        <></>
+      )}
+
+      {selectedEventData && selectedEventData?.length ? (
+        <Modal
+          footer={null}
+          visible={eventModal}
+          onCancel={() => {
+            setSelectedEvent([]);
+            setEventModal(false);
+          }}
+          width={600}
+        >
+          <Card
+            bordered={false}
+            className="header-solid mb-24"
+            title={
+              <>
+                <h6 className="font-semibold">Events</h6>
+                {/* <p>Architects design houses</p> */}
+              </>
+            }
+          >
+            <Row gutter={[24, 24]}>
+              {/* {project.map((p, index) => (
+            <Col span={24} md={12} xl={6} key={index}>
+              <Card
+                bordered={false}
+                className="card-project"
+                cover={<img alt="example" src={p.img} />}
+              >
+                <div className="card-tag">{p.titlesub}</div>
+                <h5>{p.titile}</h5>
+                <p>{p.disciption}</p>
+                <Row gutter={[6, 0]} className="card-footer">
+                  <Col span={12}>
+                    <Button type="button">VIEW PROJECT</Button>
+                  </Col>
+                  <Col span={12} className="text-right">
+                    <Avatar.Group className="avatar-chips">
+                      <Avatar size="small" src={profilavatar} />
+                      <Avatar size="small" src={convesionImg} />
+                      <Avatar size="small" src={convesionImg2} />
+                      <Avatar size="small" src={convesionImg3} />
+                    </Avatar.Group>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))} */}
+
+              {selectedEventData &&
+                selectedEventData.map((p, index) => (
+                  <Col span={24} md={24} xl={8} key={index}>
+                    <Card bordered={false} className="card-project">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Name
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '90px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Input
+                                value={p?.event_name}
+                                style={{ width: '300px' }}
+                                onChange={(e) => {
+                                  let clubDataVal = [...selectedEventData];
+                                  clubDataVal[index].event_name =
+                                    e.target.value;
+                                  setSelectedEvent(clubDataVal);
+                                }}
+                                // value={des}
+                                //   style={{ height: '150px' }}
+                                // onChange={(e) => setDesc(e.target.value)}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Level
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '100px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                style={{ width: '300px' }}
+                                defaultValue="university"
+                                value={p?.level}
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedEventData];
+                                    clubDataVal[index].level = e;
+                                    setSelectedEvent(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: 'university',
+                                    label: 'university level',
+                                  },
+                                  {
+                                    value: 'national',
+                                    label: 'national level',
+                                  },
+                                  {
+                                    value: 'international',
+                                    label: 'international level',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                position
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '80px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                value={p?.position}
+                                style={{ width: '300px' }}
+                                defaultValue="1"
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedEventData];
+                                    clubDataVal[index].position = e;
+                                    setSelectedEvent(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: '1',
+                                    label: '1',
+                                  },
+                                  { value: '2', label: '2' },
+                                  {
+                                    value: '3',
+                                    label: '3',
+                                  },
+                                  {
+                                    value: 'part',
+                                    label: 'part',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '30px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Cardinality
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '80px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                style={{ width: '300px' }}
+                                value={p?.cardinality}
+                                defaultValue="1"
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedEventData];
+                                    clubDataVal[index].cardinality = e;
+                                    setSelectedEvent(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: 'leader',
+                                    label: 'leader',
+                                  },
+                                  { value: 'member', label: 'member' },
+                                  {
+                                    value: 'individual',
+                                    label: 'individual',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div style={{ height: '20px' }}></div>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '40px' }}></div>
+                            </td>
+                            {/* <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Select a File
+                            </span>
+                          </td> */}
+                            {/* <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td> */}
+
+                            {/* <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Dragger
+                              fileList={fileVal}
+                              maxCount={1}
+                              multiple={false}
+                              onChange={handleFile}
+                              customRequest={dummyRequest}
+                              //   onChange={handleFile}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p
+                                className="ant-upload-text"
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '10px',
+                                }}
+                              >
+                                Click or drag file to this area to upload
+                              </p>
+                            </Dragger>
+                          </td> */}
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div style={{ width: '120px' }}></div>
+                              </td>
+                              {selectedEventData[index].event_name != '' &&
+                                selectedEventData[index].level != '' && (
+                                  <td style={{ textAlign: 'left' }}>
+                                    <Button
+                                      onClick={(e) => {
+                                        updateStu(
+                                          {
+                                            type: 'EVENT',
+                                            event_name: p.event_name,
+                                            level: p.level,
+                                            position: p.position,
+                                            cardinality: p.cardinality,
+                                            id: p.id,
+                                          },
+                                          dispatch
+                                        );
+                                      }}
+                                      style={{
+                                        background:
+                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                        border: 'none',
+                                        color: 'white',
+                                        width: '100px',
+                                      }}
+                                    >
+                                      Update
+                                    </Button>
+                                  </td>
+                                )}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+          </Card>
+        </Modal>
+      ) : (
+        <></>
+      )}
+
       {clubData && clubData?.length ? (
         <Card
           bordered={false}
@@ -859,21 +1724,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Input
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...clubData];
-                                  clubDataVal[index].club_name = e.target.value;
-                                  setClubData(clubDataVal);
-                                }
-                              }}
-                              value={p?.club_name}
-                              style={{ width: '300px' }}
-                              // onChange={(e) => setName(e.target.value)}
-                              // value={des}
-                              //   style={{ height: '150px' }}
-                              // onChange={(e) => setDesc(e.target.value)}
-                            />
+                            <span>{p.club_name}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -902,23 +1753,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              defaultValue="member"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...clubData];
-                                  clubDataVal[index].club_level = e;
-                                  setClubData(clubDataVal);
-                                }
-                              }}
-                              value={p?.club_level}
-                              options={[
-                                { value: 'president', label: 'president' },
-                                { value: 'lead', label: 'lead' },
-                                { value: 'member', label: 'member' },
-                              ]}
-                            />
+                            <span>{p.club_level}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -986,41 +1821,35 @@ function Profile() {
                             <td>
                               <div style={{ width: '50px' }}></div>
                             </td>
-                            {profileDataValue &&
-                              clubData &&
-                              (profileDataValue.clubs[index]?.club_name !==
-                                clubData[index].club_name ||
-                                profileDataValue.clubs[index].club_level !==
-                                  clubData[index].club_level) &&
-                              !(
-                                clubData[index].club_name == '' ||
-                                clubData[index].club_level == ''
-                              ) && (
-                                <td style={{ textAlign: 'left' }}>
-                                  <Button
-                                    onClick={(e) => {
-                                      updateStu(
-                                        {
-                                          type: 'CLUBS',
-                                          club_level: p.club_level,
-                                          club_name: p.club_name,
-                                          id: p.id,
-                                        },
-                                        dispatch
-                                      );
-                                    }}
-                                    style={{
-                                      background:
-                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                      border: 'none',
-                                      color: 'white',
-                                      width: '150px',
-                                    }}
-                                  >
-                                    Update
-                                  </Button>
-                                </td>
-                              )}
+
+                            <td style={{ textAlign: 'left' }}>
+                              <Button
+                                onClick={(e) => {
+                                  let clubArray = profileData?.clubs
+                                    ? profileData.clubs.map((club) => ({
+                                        ...club,
+                                      }))
+                                    : [];
+                                  let arr = clubArray[index];
+                                  let arrayval = [];
+                                  arrayval.push(arr);
+                                  console.log(arrayval, 'arr');
+                                  setSelectedClub(arrayval);
+
+                                  setClubModal(true);
+                                }}
+                                style={{
+                                  background:
+                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                  border: 'none',
+                                  color: 'white',
+                                  width: '100px',
+                                }}
+                              >
+                                Update
+                              </Button>
+                            </td>
+
                             <td>
                               <div style={{ width: '20px' }}></div>
                             </td>
@@ -1030,374 +1859,6 @@ function Profile() {
                                   deleteStu(
                                     {
                                       type: 'CLUBS',
-                                      id: p.id,
-                                    },
-                                    dispatch
-                                  )
-                                }
-                              >
-                                Remove
-                              </Button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </Card>
-                </Col>
-              ))}
-          </Row>
-        </Card>
-      ) : (
-        <></>
-      )}
-
-      {eventData && eventData?.length ? (
-        <Card
-          bordered={false}
-          className="header-solid mb-24"
-          title={
-            <>
-              <h6 className="font-semibold">Events</h6>
-              {/* <p>Architects design houses</p> */}
-            </>
-          }
-        >
-          <Row gutter={[24, 24]}>
-            {/* {project.map((p, index) => (
-            <Col span={24} md={12} xl={6} key={index}>
-              <Card
-                bordered={false}
-                className="card-project"
-                cover={<img alt="example" src={p.img} />}
-              >
-                <div className="card-tag">{p.titlesub}</div>
-                <h5>{p.titile}</h5>
-                <p>{p.disciption}</p>
-                <Row gutter={[6, 0]} className="card-footer">
-                  <Col span={12}>
-                    <Button type="button">VIEW PROJECT</Button>
-                  </Col>
-                  <Col span={12} className="text-right">
-                    <Avatar.Group className="avatar-chips">
-                      <Avatar size="small" src={profilavatar} />
-                      <Avatar size="small" src={convesionImg} />
-                      <Avatar size="small" src={convesionImg2} />
-                      <Avatar size="small" src={convesionImg3} />
-                    </Avatar.Group>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-          ))} */}
-
-            {eventData &&
-              eventData.map((p, index) => (
-                <Col span={24} md={24} xl={8} key={index}>
-                  <Card bordered={false} className="card-project">
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style={{ width: '50px' }}></div>
-                          </td>
-                          <td style={{ textAlign: 'left' }}>
-                            <span
-                              style={{
-                                color: '#070C83',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                              }}
-                            >
-                              Name
-                            </span>
-                          </td>
-                          <td>
-                            <div style={{ width: '90px' }}></div>
-                          </td>
-
-                          <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Input
-                              value={p?.event_name}
-                              style={{ width: '300px' }}
-                              onChange={(e) => {
-                                let clubDataVal = [...eventData];
-                                clubDataVal[index].event_name = e.target.value;
-                                setEventData(clubDataVal);
-                              }}
-                              // value={des}
-                              //   style={{ height: '150px' }}
-                              // onChange={(e) => setDesc(e.target.value)}
-                            />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div style={{ height: '20px' }}></div>
-
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style={{ width: '50px' }}></div>
-                          </td>
-                          <td style={{ textAlign: 'left' }}>
-                            <span
-                              style={{
-                                color: '#070C83',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                              }}
-                            >
-                              Level
-                            </span>
-                          </td>
-                          <td>
-                            <div style={{ width: '100px' }}></div>
-                          </td>
-
-                          <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              defaultValue="university"
-                              value={p?.level}
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...eventData];
-                                  clubDataVal[index].level = e;
-                                  setEventData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: 'university',
-                                  label: 'university level',
-                                },
-                                { value: 'national', label: 'national level' },
-                                {
-                                  value: 'international',
-                                  label: 'international level',
-                                },
-                              ]}
-                            />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div style={{ height: '20px' }}></div>
-
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style={{ width: '50px' }}></div>
-                          </td>
-                          <td style={{ textAlign: 'left' }}>
-                            <span
-                              style={{
-                                color: '#070C83',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                              }}
-                            >
-                              position
-                            </span>
-                          </td>
-                          <td>
-                            <div style={{ width: '80px' }}></div>
-                          </td>
-
-                          <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              value={p?.position}
-                              style={{ width: '300px' }}
-                              defaultValue="1"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...eventData];
-                                  clubDataVal[index].position = e;
-                                  setEventData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: '1',
-                                  label: '1',
-                                },
-                                { value: '2', label: '2' },
-                                {
-                                  value: '3',
-                                  label: '3',
-                                },
-                                {
-                                  value: 'part',
-                                  label: 'part',
-                                },
-                              ]}
-                            />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div style={{ height: '20px' }}></div>
-
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style={{ width: '30px' }}></div>
-                          </td>
-                          <td style={{ textAlign: 'left' }}>
-                            <span
-                              style={{
-                                color: '#070C83',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                              }}
-                            >
-                              Cardinality
-                            </span>
-                          </td>
-                          <td>
-                            <div style={{ width: '80px' }}></div>
-                          </td>
-
-                          <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              value={p?.cardinality}
-                              defaultValue="1"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...eventData];
-                                  clubDataVal[index].cardinality = e;
-                                  setEventData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: 'leader',
-                                  label: 'leader',
-                                },
-                                { value: 'member', label: 'member' },
-                                {
-                                  value: 'individual',
-                                  label: 'individual',
-                                },
-                              ]}
-                            />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                    <div style={{ height: '20px' }}></div>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style={{ width: '40px' }}></div>
-                          </td>
-                          {/* <td style={{ textAlign: 'left' }}>
-                            <span
-                              style={{
-                                color: '#070C83',
-                                fontWeight: 600,
-                                fontSize: '15px',
-                              }}
-                            >
-                              Select a File
-                            </span>
-                          </td> */}
-                          {/* <td>
-                            <div style={{ width: '90px' }}></div>
-                          </td> */}
-
-                          {/* <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Dragger
-                              fileList={fileVal}
-                              maxCount={1}
-                              multiple={false}
-                              onChange={handleFile}
-                              customRequest={dummyRequest}
-                              //   onChange={handleFile}
-                            >
-                              <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                              </p>
-                              <p
-                                className="ant-upload-text"
-                                style={{
-                                  color: '#070C83',
-                                  fontWeight: 600,
-                                  fontSize: '10px',
-                                }}
-                              >
-                                Click or drag file to this area to upload
-                              </p>
-                            </Dragger>
-                          </td> */}
-                        </tr>
-                      </tbody>
-                    </table>
-
-                    <div>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div style={{ width: '50px' }}></div>
-                            </td>
-                            {profileDataValue &&
-                              eventData &&
-                              (profileDataValue.events[index]?.event_name !==
-                                eventData[index].event_name ||
-                                profileDataValue.events[index].level !==
-                                  eventData[index].level ||
-                                profileDataValue.events[index].cardinality !==
-                                  eventData[index].cardinality ||
-                                eventData[index].position !==
-                                  profileDataValue.events[index].position) &&
-                              !(
-                                eventData[index].event_name == '' ||
-                                eventData[index].level == ''
-                              ) && (
-                                <td style={{ textAlign: 'left' }}>
-                                  <Button
-                                    onClick={(e) => {
-                                      updateStu(
-                                        {
-                                          type: 'EVENT',
-                                          event_name: p.event_name,
-                                          level: p.level,
-                                          position: p.position,
-                                          cardinality: p.cardinality,
-                                          id: p.id,
-                                        },
-                                        dispatch
-                                      );
-                                    }}
-                                    style={{
-                                      background:
-                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                      border: 'none',
-                                      color: 'white',
-                                      width: '150px',
-                                    }}
-                                  >
-                                    Update
-                                  </Button>
-                                </td>
-                              )}
-                            <td>
-                              <div style={{ width: '20px' }}></div>
-                            </td>
-                            <td>
-                              <Button
-                                onClick={() =>
-                                  deleteStu(
-                                    {
-                                      type: 'EVENT',
                                       id: p.id,
                                     },
                                     dispatch
@@ -1485,18 +1946,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Input
-                              value={p?.sport_name}
-                              style={{ width: '300px' }}
-                              onChange={(e) => {
-                                let clubDataVal = [...sportData];
-                                clubDataVal[index].sport_name = e.target.value;
-                                setSportData(clubDataVal);
-                              }}
-                              // value={des}
-                              //   style={{ height: '150px' }}
-                              // onChange={(e) => setDesc(e.target.value)}
-                            />
+                            <span>{p?.sport_name}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1525,29 +1975,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              defaultValue="university"
-                              value={p?.level}
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...sportData];
-                                  clubDataVal[index].level = e;
-                                  setSportData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: 'university',
-                                  label: 'university level',
-                                },
-                                { value: 'national', label: 'national level' },
-                                {
-                                  value: 'international',
-                                  label: 'international level',
-                                },
-                              ]}
-                            />
+                            <span>{p?.level}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1576,33 +2004,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              value={p?.position}
-                              style={{ width: '300px' }}
-                              defaultValue="1"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...sportData];
-                                  clubDataVal[index].position = e;
-                                  setSportData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: '1',
-                                  label: '1',
-                                },
-                                { value: '2', label: '2' },
-                                {
-                                  value: '3',
-                                  label: '3',
-                                },
-                                {
-                                  value: 'part',
-                                  label: 'part',
-                                },
-                              ]}
-                            />
+                            <span>{p?.position}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1631,29 +2033,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              value={p?.cardinality}
-                              defaultValue="1"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...sportData];
-                                  clubDataVal[index].cardinality = e;
-                                  setSportData(clubDataVal);
-                                }
-                              }}
-                              options={[
-                                {
-                                  value: 'leader',
-                                  label: 'leader',
-                                },
-                                { value: 'member', label: 'member' },
-                                {
-                                  value: 'individual',
-                                  label: 'individual',
-                                },
-                              ]}
-                            />
+                            <span>{p?.cardinality}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1716,47 +2096,34 @@ function Profile() {
                             <td>
                               <div style={{ width: '50px' }}></div>
                             </td>
-                            {profileDataValue &&
-                              sportData &&
-                              (profileDataValue.sports[index]?.sport_name !==
-                                sportData[index].sport_name ||
-                                profileDataValue.sports[index].level !==
-                                  sportData[index].level ||
-                                profileDataValue.sports[index].cardinality !==
-                                  sportData[index].cardinality ||
-                                sportData[index].position !==
-                                  profileDataValue.sports[index].position) &&
-                              !(
-                                sportData[index].sport_name == '' ||
-                                sportData[index].level == ''
-                              ) && (
-                                <td style={{ textAlign: 'left' }}>
-                                  <Button
-                                    onClick={(e) => {
-                                      updateStu(
-                                        {
-                                          type: 'SPORT',
-                                          event_name: p.sport_name,
-                                          level: p.level,
-                                          position: p.position,
-                                          cardinality: p.cardinality,
-                                          id: p.id,
-                                        },
-                                        dispatch
-                                      );
-                                    }}
-                                    style={{
-                                      background:
-                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                      border: 'none',
-                                      color: 'white',
-                                      width: '150px',
-                                    }}
-                                  >
-                                    Update
-                                  </Button>
-                                </td>
-                              )}
+
+                            <td style={{ textAlign: 'left' }}>
+                              <Button
+                                onClick={(e) => {
+                                  let arry = profileData?.sports
+                                    ? profileData?.sports.map((club) => ({
+                                        ...club,
+                                      }))
+                                    : [];
+                                  console.log(arry[index], 'll');
+
+                                  let arrNew = [];
+                                  arrNew.push(arry[index]);
+                                  console.log(arrNew, 'll');
+                                  setSelectedSport(arrNew);
+                                  setSportModal(true);
+                                }}
+                                style={{
+                                  background:
+                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                  border: 'none',
+                                  color: 'white',
+                                  width: '100px',
+                                }}
+                              >
+                                Update
+                              </Button>
+                            </td>
                             <td>
                               <div style={{ width: '20px' }}></div>
                             </td>
@@ -1784,6 +2151,365 @@ function Profile() {
               ))}
           </Row>
         </Card>
+      ) : (
+        <></>
+      )}
+
+      {selectedSportData && selectedSportData?.length ? (
+        <Modal
+          visible={sportModal}
+          footer={null}
+          width={600}
+          onCancel={() => {
+            setSportModal(false);
+            setSelectedSport([]);
+          }}
+        >
+          <Card
+            bordered={false}
+            className="header-solid mb-24"
+            title={
+              <>
+                <h6 className="font-semibold">Sports</h6>
+                {/* <p>Architects design houses</p> */}
+              </>
+            }
+          >
+            <Row gutter={[24, 24]}>
+              {/* {project.map((p, index) => (
+            <Col span={24} md={12} xl={6} key={index}>
+              <Card
+                bordered={false}
+                className="card-project"
+                cover={<img alt="example" src={p.img} />}
+              >
+                <div className="card-tag">{p.titlesub}</div>
+                <h5>{p.titile}</h5>
+                <p>{p.disciption}</p>
+                <Row gutter={[6, 0]} className="card-footer">
+                  <Col span={12}>
+                    <Button type="button">VIEW PROJECT</Button>
+                  </Col>
+                  <Col span={12} className="text-right">
+                    <Avatar.Group className="avatar-chips">
+                      <Avatar size="small" src={profilavatar} />
+                      <Avatar size="small" src={convesionImg} />
+                      <Avatar size="small" src={convesionImg2} />
+                      <Avatar size="small" src={convesionImg3} />
+                    </Avatar.Group>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))} */}
+
+              {selectedSportData &&
+                selectedSportData.map((p, index) => (
+                  <Col span={24} md={24} xl={8} key={index}>
+                    <Card bordered={false} className="card-project">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Name
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '90px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Input
+                                value={p?.sport_name}
+                                style={{ width: '300px' }}
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedSportData];
+                                    clubDataVal[index].sport_name =
+                                      e.target.value;
+
+                                    setSelectedSport(clubDataVal);
+                                  }
+                                }}
+                                // value={des}
+                                //   style={{ height: '150px' }}
+                                // onChange={(e) => setDesc(e.target.value)}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Level
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '100px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                style={{ width: '300px' }}
+                                defaultValue="university"
+                                value={p?.level}
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedSportData];
+                                    clubDataVal[index].level = e;
+
+                                    setSelectedSport(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: 'university',
+                                    label: 'university level',
+                                  },
+                                  {
+                                    value: 'national',
+                                    label: 'national level',
+                                  },
+                                  {
+                                    value: 'international',
+                                    label: 'international level',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                position
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '80px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                value={p?.position}
+                                style={{ width: '300px' }}
+                                defaultValue="1"
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedSportData];
+                                    clubDataVal[index].position = e;
+
+                                    setSelectedSport(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: '1',
+                                    label: '1',
+                                  },
+                                  { value: '2', label: '2' },
+                                  {
+                                    value: '3',
+                                    label: '3',
+                                  },
+                                  {
+                                    value: 'part',
+                                    label: 'part',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '30px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Cardinality
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '80px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                style={{ width: '300px' }}
+                                value={p?.cardinality}
+                                defaultValue="1"
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...selectedSportData];
+                                    clubDataVal[index].cardinality = e;
+
+                                    setSelectedSport(clubDataVal);
+                                  }
+                                }}
+                                options={[
+                                  {
+                                    value: 'leader',
+                                    label: 'leader',
+                                  },
+                                  { value: 'member', label: 'member' },
+                                  {
+                                    value: 'individual',
+                                    label: 'individual',
+                                  },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div style={{ height: '20px' }}></div>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '40px' }}></div>
+                            </td>
+                            {/* <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Select a File
+                            </span>
+                          </td> */}
+                            {/* <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td> */}
+
+                            {/* <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Dragger
+                              fileList={fileVal}
+                              maxCount={1}
+                              multiple={false}
+                              onChange={handleFile}
+                              customRequest={dummyRequest}
+                              //   onChange={handleFile}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p
+                                className="ant-upload-text"
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '10px',
+                                }}
+                              >
+                                Click or drag file to this area to upload
+                              </p>
+                            </Dragger>
+                          </td> */}
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div style={{ width: '150px' }}></div>
+                              </td>
+
+                              {selectedSportData[index].sport_name != '' &&
+                                selectedSportData[index].level != '' && (
+                                  <td style={{ textAlign: 'left' }}>
+                                    <Button
+                                      onClick={(e) => {
+                                        updateStu(
+                                          {
+                                            type: 'SPORT',
+                                            event_name: p.sport_name,
+                                            level: p.level,
+                                            position: p.position,
+                                            cardinality: p.cardinality,
+                                            id: p.id,
+                                          },
+                                          dispatch
+                                        );
+                                      }}
+                                      style={{
+                                        background:
+                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                        border: 'none',
+                                        color: 'white',
+                                        width: '100px',
+                                      }}
+                                    >
+                                      Update
+                                    </Button>
+                                  </td>
+                                )}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+          </Card>
+        </Modal>
       ) : (
         <></>
       )}
@@ -1855,22 +2581,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Input
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...selfLearningData];
-                                  clubDataVal[index].course_name =
-                                    e.target.value;
-                                  setSelfLearningData(clubDataVal);
-                                }
-                              }}
-                              value={p?.course_name}
-                              style={{ width: '300px' }}
-                              // onChange={(e) => setName(e.target.value)}
-                              // value={des}
-                              //   style={{ height: '150px' }}
-                              // onChange={(e) => setDesc(e.target.value)}
-                            />
+                            <span>{p?.course_name}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1891,7 +2602,7 @@ function Profile() {
                                 fontSize: '15px',
                               }}
                             >
-                              Position
+                              level
                             </span>
                           </td>
                           <td>
@@ -1899,26 +2610,7 @@ function Profile() {
                           </td>
 
                           <td style={{ textAlign: 'left', width: '600px' }}>
-                            <Select
-                              style={{ width: '300px' }}
-                              defaultValue="member"
-                              onChange={(e) => {
-                                {
-                                  let clubDataVal = [...selfLearningData];
-                                  clubDataVal[index].course_level = e;
-                                  setSelfLearningData(clubDataVal);
-                                }
-                              }}
-                              value={p?.course_level}
-                              options={[
-                                { value: 'beginner', label: 'beginner' },
-                                {
-                                  value: 'intermediate',
-                                  label: 'intermediate',
-                                },
-                                { value: 'expert', label: 'expert' },
-                              ]}
-                            />
+                            <span>{p?.course_level}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -1982,43 +2674,33 @@ function Profile() {
                             <td>
                               <div style={{ width: '50px' }}></div>
                             </td>
-                            {profileDataValue &&
-                              selfLearningData &&
-                              (profileDataValue.selflearnings[index]
-                                ?.course_name !==
-                                selfLearningData[index].course_name ||
-                                profileDataValue.selflearnings[index]
-                                  .course_level !==
-                                  selfLearningData[index].course_level) &&
-                              !(
-                                selfLearningData[index].course_name == '' ||
-                                selfLearningData[index].course_level == ''
-                              ) && (
-                                <td style={{ textAlign: 'left' }}>
-                                  <Button
-                                    onClick={(e) => {
-                                      updateStu(
-                                        {
-                                          type: 'SELF_LEARNINGS',
-                                          course_level: p.course_level,
-                                          course_name: p.course_name,
-                                          id: p.id,
-                                        },
-                                        dispatch
-                                      );
-                                    }}
-                                    style={{
-                                      background:
-                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                      border: 'none',
-                                      color: 'white',
-                                      width: '150px',
-                                    }}
-                                  >
-                                    Update
-                                  </Button>
-                                </td>
-                              )}
+
+                            <td style={{ textAlign: 'left' }}>
+                              <Button
+                                onClick={(e) => {
+                                  let selfLearning = profileData?.selflearnings
+                                    ? profileData.selflearnings.map((club) => ({
+                                        ...club,
+                                      }))
+                                    : [];
+
+                                  let arry = [];
+                                  arry.push(selfLearning[index]);
+                                  serSelectedSelfLearning(arry);
+                                  setSelfModal(true);
+                                }}
+                                style={{
+                                  background:
+                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                  border: 'none',
+                                  color: 'white',
+                                  width: '100px',
+                                }}
+                              >
+                                Update
+                              </Button>
+                            </td>
+
                             <td>
                               <div style={{ width: '20px' }}></div>
                             </td>
@@ -2046,6 +2728,251 @@ function Profile() {
               ))}
           </Row>
         </Card>
+      ) : (
+        <></>
+      )}
+
+      {SelectedSelfLearning && SelectedSelfLearning?.length ? (
+        <Modal
+          footer={null}
+          width={600}
+          visible={selfModal}
+          onCancel={() => {
+            setSelfModal(false);
+            serSelectedSelfLearning([]);
+          }}
+        >
+          <Card
+            bordered={false}
+            className="header-solid mb-24"
+            title={
+              <>
+                <h6 className="font-semibold">Self Learning</h6>
+                {/* <p>Architects design houses</p> */}
+              </>
+            }
+          >
+            <Row gutter={[24, 24]}>
+              {/* {project.map((p, index) => (
+            <Col span={24} md={12} xl={6} key={index}>
+              <Card
+                bordered={false}
+                className="card-project"
+                cover={<img alt="example" src={p.img} />}
+              >
+                <div className="card-tag">{p.titlesub}</div>
+                <h5>{p.titile}</h5>
+                <p>{p.disciption}</p>
+                <Row gutter={[6, 0]} className="card-footer">
+                  <Col span={12}>
+                    <Button type="button">VIEW PROJECT</Button>
+                  </Col>
+                  <Col span={12} className="text-right">
+                    <Avatar.Group className="avatar-chips">
+                      <Avatar size="small" src={profilavatar} />
+                      <Avatar size="small" src={convesionImg} />
+                      <Avatar size="small" src={convesionImg2} />
+                      <Avatar size="small" src={convesionImg3} />
+                    </Avatar.Group>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))} */}
+
+              {SelectedSelfLearning &&
+                SelectedSelfLearning.map((p, index) => (
+                  <Col span={24} md={24} xl={8} key={index}>
+                    {console.log(p, 'test')}
+
+                    <Card bordered={false} className="card-project">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Course Name
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '90px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Input
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...SelectedSelfLearning];
+                                    clubDataVal[index].course_name =
+                                      e.target.value;
+                                    serSelectedSelfLearning(clubDataVal);
+                                  }
+                                }}
+                                value={p?.course_name}
+                                style={{ width: '300px' }}
+                                // onChange={(e) => setName(e.target.value)}
+                                // value={des}
+                                //   style={{ height: '150px' }}
+                                // onChange={(e) => setDesc(e.target.value)}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '50px' }}></div>
+                            </td>
+                            <td style={{ textAlign: 'left' }}>
+                              <span
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '15px',
+                                }}
+                              >
+                                Position
+                              </span>
+                            </td>
+                            <td>
+                              <div style={{ width: '80px' }}></div>
+                            </td>
+
+                            <td style={{ textAlign: 'left', width: '600px' }}>
+                              <Select
+                                style={{ width: '300px' }}
+                                defaultValue="member"
+                                onChange={(e) => {
+                                  {
+                                    let clubDataVal = [...SelectedSelfLearning];
+                                    clubDataVal[index].course_level = e;
+                                    serSelectedSelfLearning(clubDataVal);
+                                  }
+                                }}
+                                value={p?.course_level}
+                                options={[
+                                  { value: 'beginner', label: 'beginner' },
+                                  {
+                                    value: 'intermediate',
+                                    label: 'intermediate',
+                                  },
+                                  { value: 'expert', label: 'expert' },
+                                ]}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style={{ height: '20px' }}></div>
+
+                      <div style={{ height: '20px' }}></div>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div style={{ width: '40px' }}></div>
+                            </td>
+                            {/* <td style={{ textAlign: 'left' }}>
+                            <span
+                              style={{
+                                color: '#070C83',
+                                fontWeight: 600,
+                                fontSize: '15px',
+                              }}
+                            >
+                              Select a File
+                            </span>
+                          </td> */}
+                            {/* <td>
+                            <div style={{ width: '90px' }}></div>
+                          </td> */}
+
+                            {/* <td style={{ textAlign: 'left', width: '600px' }}>
+                            <Dragger
+                              fileList={fileVal}
+                              maxCount={1}
+                              multiple={false}
+                              onChange={handleFile}
+                              customRequest={dummyRequest}
+                              //   onChange={handleFile}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p
+                                className="ant-upload-text"
+                                style={{
+                                  color: '#070C83',
+                                  fontWeight: 600,
+                                  fontSize: '10px',
+                                }}
+                              >
+                                Click or drag file to this area to upload
+                              </p>
+                            </Dragger>
+                          </td> */}
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div style={{ width: '150px' }}></div>
+                              </td>
+                              {SelectedSelfLearning[index].course_name != '' &&
+                                SelectedSelfLearning[index].course_level !=
+                                  '' && (
+                                  <td style={{ textAlign: 'left' }}>
+                                    <Button
+                                      onClick={(e) => {
+                                        updateStu(
+                                          {
+                                            type: 'SELF_LEARNINGS',
+                                            course_level: p.course_level,
+                                            course_name: p.course_name,
+                                            id: p.id,
+                                          },
+                                          dispatch
+                                        );
+                                      }}
+                                      style={{
+                                        background:
+                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
+                                        border: 'none',
+                                        color: 'white',
+                                        width: '100px',
+                                      }}
+                                    >
+                                      Update
+                                    </Button>
+                                  </td>
+                                )}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+          </Card>
+        </Modal>
       ) : (
         <></>
       )}
