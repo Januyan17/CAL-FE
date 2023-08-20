@@ -161,6 +161,24 @@ const StudentAddPerformance = () => {
                           GPA
                         </span>
                       </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          marginLeft: '-29px',
+                          marginTop: '179px',
+                          zIndex: 1, // To bring the GpaIcon forward
+                        }}
+                      >
+                        <Button
+                          onClick={() => history.push('/addPerformance/gpa')}
+                          style={{ height: '40px', width: '105px' }}
+                        >
+                          {' '}
+                          view
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -218,8 +236,8 @@ const StudentAddPerformance = () => {
                             position: 'absolute',
                             top: 0,
                             left: 0,
-                            marginLeft: '-20px',
-                            marginTop: '25px',
+                            marginLeft: '-18px',
+                            marginTop: '18px',
                             zIndex: 1, // To bring the GpaIcon forward
                           }}
                         >
@@ -232,6 +250,27 @@ const StudentAddPerformance = () => {
                           >
                             Learning
                           </span>
+                        </div>
+
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            marginLeft: '-34px',
+                            marginTop: '69px',
+                            zIndex: 1, // To bring the GpaIcon forward
+                          }}
+                        >
+                          <Button
+                            onClick={() =>
+                              history.push('/addPerformance/selfLearning')
+                            }
+                            style={{ height: '40px', width: '105px' }}
+                          >
+                            {' '}
+                            view
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -285,6 +324,24 @@ const StudentAddPerformance = () => {
                           Sports
                         </span>
                       </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          marginLeft: '-29px',
+                          marginTop: '179px',
+                          zIndex: 1, // To bring the GpaIcon forward
+                        }}
+                      >
+                        <Button
+                          onClick={() => history.push('/addPerformance/sport')}
+                          style={{ height: '40px', width: '105px' }}
+                        >
+                          {' '}
+                          view
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -336,6 +393,24 @@ const StudentAddPerformance = () => {
                           Club
                         </span>
                       </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          marginLeft: '-29px',
+                          marginTop: '179px',
+                          zIndex: 1, // To bring the GpaIcon forward
+                        }}
+                      >
+                        <Button
+                          onClick={() => history.push('/addPerformance/club')}
+                          style={{ height: '40px', width: '105px' }}
+                        >
+                          {' '}
+                          view
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -386,6 +461,24 @@ const StudentAddPerformance = () => {
                         >
                           Events
                         </span>
+                      </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          marginLeft: '-29px',
+                          marginTop: '179px',
+                          zIndex: 1, // To bring the GpaIcon forward
+                        }}
+                      >
+                        <Button
+                          onClick={() => history.push('/addPerformance/event')}
+                          style={{ height: '40px', width: '105px' }}
+                        >
+                          {' '}
+                          view
+                        </Button>
                       </div>
                     </div>
                   </div>

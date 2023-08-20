@@ -59,6 +59,7 @@ import Dragger from 'antd/lib/upload/Dragger';
 import { InboxOutlined, CloseOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import UpdateProfile from './updateProfile';
+import { RFC_2822 } from 'moment';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ function Profile() {
   const updateProfileInfoStatus = useSelector(
     (state) => state?.studentReducer?.updateProfileInfoStatus
   );
+  const [gpaModalStatus, setGpaModal] = useState(false);
 
   const deleteStuStatus = useSelector(
     (state) => state?.studentReducer?.deleteStuStatus
@@ -403,6 +405,30 @@ function Profile() {
                     {profileDataValue?.first_name} {profileDataValue?.last_name}
                   </h4>
                   <p>{profileDataValue?.role?.role_name || ''}</p>
+                  {profileDataValue.rank &&
+                  profileDataValue?.role?.role_code === 'STUDENT' &&
+                  [1, 2, 3].includes(profileDataValue.rank) ? (
+                    <p>Rank:{profileDataValue?.rank || ''}</p>
+                  ) : (
+                    <></>
+                  )}
+
+                  {profileDataValue.rank &&
+                  profileDataValue?.role?.role_code === 'STUDENT' &&
+                  [1, 2, 3].includes(profileDataValue.rank) ? (
+                    <p>
+                      Badge:
+                      {profileDataValue?.rank === 1
+                        ? 'Gold'
+                        : profileDataValue?.rank === 2
+                        ? 'Silver'
+                        : profileDataValue?.rank === 3
+                        ? 'Bronze'
+                        : ''}
+                    </p>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </Avatar.Group>
             </Col>
@@ -586,12 +612,123 @@ function Profile() {
               className="header-solid h-full"
               bodyStyle={{ paddingTop: 0, paddingBottom: 16 }}
             >
-              <Descriptions
-                title={`Your Current GPA is ${profileDataValue.gpas[0]?.value}`}
-                span={3}
-              ></Descriptions>
+              <Row>
+                <Col lg={6}>
+                  <Descriptions
+                    title={`Your Current GPA is ${profileDataValue.gpas[0]?.value}`}
+                    span={3}
+                  ></Descriptions>{' '}
+                </Col>
+                <Col lg={6}>
+                  <Button
+                    style={{ height: '35px' }}
+                    onClick={() => setGpaModal(true)}
+                  >
+                    Edit
+                  </Button>
+                </Col>
+              </Row>
+              <Modal
+                visible={gpaModalStatus}
+                footer={null}
+                onCancel={() => setGpaModal(false)}
+              >
+                <GpaEdit score={profileDataValue.gpas[0]?.value} />
+              </Modal>
 
-              <GpaEdit score={profileDataValue.gpas[0]?.value} />
+              <table>
+                <tbody>
+                  {profileDataValue?.skills.map((data) => {
+                    if (data?.knowledge) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Knowledge Skill</td>
+                            <td>
+                              <b>&ensp;{data.knowledge} &ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+                    if (data?.leadership) {
+                      return (
+                        <>
+                          <tr>
+                            <td>leadership Skill</td>
+                            <td>
+                              <b>&ensp;{data.leadership}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+
+                    if (data?.problem_solving) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Problem Solving Skill</td>
+                            <td>
+                              <b>&ensp;{data.problem_solving}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+
+                    if (data?.team_work) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Team work Skill</td>
+                            <td>
+                              <b>&ensp;{data.team_work}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+
+                    if (data?.communication) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Communication Skill</td>
+                            <td>
+                              <b>&ensp;{data.communication}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+                    if (data?.creativity) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Creativity Skill</td>
+                            <td>
+                              <b>&ensp;{data.creativity}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+                    if (data?.descision_making) {
+                      return (
+                        <>
+                          <tr>
+                            <td>Descision making Skill</td>
+                            <td>
+                              <b>&ensp;{data.creativity}&ensp;points</b>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }
+                  })}
+                </tbody>
+              </table>
             </Card>
           </Col>
         ) : (

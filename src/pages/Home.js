@@ -388,9 +388,7 @@ function Home() {
     if (formattedDate !== 'Invalid Date') {
       getAdsByDate(formattedDate, dispatch);
     } else {
-      const dateVal = new Date();
-      const forDate = dateVal.toLocaleString('en-US');
-      getAdsByDate(forDate, dispatch);
+      getAdsByDate('', dispatch);
     }
   };
 
@@ -502,7 +500,9 @@ function Home() {
                   &ensp;&ensp;&ensp;{' '}
                   <b>
                     Oops seems like there is no events on&ensp;
-                    {moment(selectedDay).format('YYYY-MM-DD')}
+                    {selectedDay == 'Invalid Date'
+                      ? moment(new Date()).format('YYYY-MM-DD')
+                      : moment(selectedDay).format('YYYY-MM-DD')}
                   </b>
                 </>
               )}

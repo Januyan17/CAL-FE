@@ -94,12 +94,21 @@ const StudentViewPerformance = () => {
         </>
       ),
     },
+
     {
-      title: 'Badges',
-      dataIndex: 'time',
-      render: () => (
+      title: 'Badge',
+      key: 'ranks',
+      render: (datas, record) => (
         <>
-          <Rate />
+          <span>
+            {datas?.ranks === 1
+              ? 'Gold'
+              : datas?.ranks === 2
+              ? 'Silver'
+              : datas?.ranks === 3
+              ? 'Bronze'
+              : ''}
+          </span>
         </>
       ),
     },

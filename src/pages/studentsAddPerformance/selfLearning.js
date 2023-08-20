@@ -98,7 +98,7 @@ const SelfLearning = () => {
                     <tbody>
                       <tr>
                         <td>
-                          <div style={{ width: '50px' }}></div>
+                          <div style={{ width: '30px' }}></div>
                         </td>
                         <td style={{ textAlign: 'left' }}>
                           <span
@@ -112,12 +112,12 @@ const SelfLearning = () => {
                           </span>
                         </td>
                         <td>
-                          <div style={{ width: '90px' }}></div>
+                          <div style={{ width: '65px' }}></div>
                         </td>
 
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Input
-                            style={{ width: '300px' }}
+                            style={{ width: '200px' }}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             // value={des}
@@ -134,7 +134,7 @@ const SelfLearning = () => {
                     <tbody>
                       <tr>
                         <td>
-                          <div style={{ width: '50px' }}></div>
+                          <div style={{ width: '30px' }}></div>
                         </td>
                         <td style={{ textAlign: 'left' }}>
                           <span
@@ -148,12 +148,12 @@ const SelfLearning = () => {
                           </span>
                         </td>
                         <td>
-                          <div style={{ width: '95px' }}></div>
+                          <div style={{ width: '75px' }}></div>
                         </td>
 
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Select
-                            style={{ width: '300px' }}
+                            style={{ width: '200px' }}
                             defaultValue="beginner"
                             onChange={(e) => setLevel(e)}
                             options={[
@@ -173,7 +173,7 @@ const SelfLearning = () => {
                     <tbody>
                       <tr>
                         <td>
-                          <div style={{ width: '40px' }}></div>
+                          <div style={{ width: '30px' }}></div>
                         </td>
                         <td style={{ textAlign: 'left' }}>
                           <span
@@ -188,10 +188,10 @@ const SelfLearning = () => {
                           </span>
                         </td>
                         <td>
-                          <div style={{ width: '170px' }}></div>
+                          <div style={{ width: '130px' }}></div>
                         </td>
 
-                        <td style={{ textAlign: 'left', width: '600px' }}>
+                        <td style={{ textAlign: 'left', width: '400px' }}>
                           <Dragger
                             fileList={fileVal}
                             maxCount={1}

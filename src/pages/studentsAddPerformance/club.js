@@ -118,7 +118,7 @@ const Club = () => {
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Input
                             value={name}
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             onChange={(e) => setName(e.target.value)}
                             // value={des}
                             //   style={{ height: '150px' }}
@@ -153,7 +153,7 @@ const Club = () => {
 
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Select
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             defaultValue="member"
                             onChange={(e) => setLevel(e)}
                             options={[

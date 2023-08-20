@@ -41,6 +41,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import jwt from 'jwt-decode';
 import Swal from 'sweetalert2';
 import { signOut } from '../../redux/action';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -268,7 +269,7 @@ function Header({
   const [sidenavType, setSidenavType] = useState('transparent');
 
   useEffect(() => window.scrollTo(0, 0));
-
+  const history = useHistory();
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
 
@@ -451,13 +452,9 @@ function Header({
               </div>
             </div>
           </Drawer> */}
-          <div
-            style={{ cursor: 'pointer' }}
-            className="btn-sign-in"
-            onClick={signOutFunc}
-          >
-            {profile}
-            <span>Sign out</span>
+          <div style={{ cursor: 'pointer' }} className="btn-sign-in">
+            <span onClick={() => history.push('/profile')}>{profile}</span>
+            <span onClick={signOutFunc}>Sign out</span>
           </div>
           <span style={{ fontWeight: 600 }}>{`Hey ${
             tokenDecoded?.sub?.first_name || ''

@@ -127,7 +127,7 @@ const Event = () => {
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Input
                             value={name}
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             onChange={(e) => setName(e.target.value)}
                             // value={des}
                             //   style={{ height: '150px' }}
@@ -163,7 +163,7 @@ const Event = () => {
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Select
                             value={level}
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             onChange={(e) => setLevel(e)}
                             options={[
                               {
@@ -207,7 +207,7 @@ const Event = () => {
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Select
                             value={position}
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             onChange={(e) => setPosition(e)}
                             options={[
                               {
@@ -256,7 +256,7 @@ const Event = () => {
                         <td style={{ textAlign: 'left', width: '600px' }}>
                           <Select
                             value={cardinality}
-                            style={{ width: '300px' }}
+                            style={{ width: '180px' }}
                             onChange={(e) => setCardinality(e)}
                             options={[
                               {
@@ -294,7 +294,7 @@ const Event = () => {
                           </span>
                         </td>
                         <td>
-                          <div style={{ width: '90px' }}></div>
+                          <div style={{ width: '60px' }}></div>
                         </td>
 
                         <td style={{ textAlign: 'left', width: '600px' }}>
