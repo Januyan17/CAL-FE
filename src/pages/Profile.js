@@ -1,15 +1,4 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   Row,
@@ -26,25 +15,25 @@ import {
   Modal,
   Select,
   Input,
-} from 'antd';
+} from "antd";
 
 import {
   FacebookOutlined,
   TwitterOutlined,
   InstagramOutlined,
   VerticalAlignTopOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
-import BgProfile from '../assets/images/bg-profile.jpg';
-import profilavatar from '../assets/images/face-1.jpg';
-import convesionImg from '../assets/images/face-3.jpg';
-import convesionImg2 from '../assets/images/face-4.jpg';
-import convesionImg3 from '../assets/images/face-5.jpeg';
-import convesionImg4 from '../assets/images/face-6.jpeg';
-import convesionImg5 from '../assets/images/face-2.jpg';
-import project1 from '../assets/images/home-decor-1.jpeg';
-import project2 from '../assets/images/home-decor-2.jpeg';
-import project3 from '../assets/images/home-decor-3.jpeg';
+import BgProfile from "../assets/images/bg-profile.jpg";
+import profilavatar from "../assets/images/face-1.jpg";
+import convesionImg from "../assets/images/face-3.jpg";
+import convesionImg2 from "../assets/images/face-4.jpg";
+import convesionImg3 from "../assets/images/face-5.jpeg";
+import convesionImg4 from "../assets/images/face-6.jpeg";
+import convesionImg5 from "../assets/images/face-2.jpg";
+import project1 from "../assets/images/home-decor-1.jpeg";
+import project2 from "../assets/images/home-decor-2.jpeg";
+import project3 from "../assets/images/home-decor-3.jpeg";
 import {
   deleteStu,
   getProfileDetails,
@@ -52,14 +41,14 @@ import {
   updateProfileDetails,
   updateProfilePicDetails,
   updateStu,
-} from '../redux/action';
-import { useDispatch, useSelector } from 'react-redux';
-import GpaEdit from './studentPerformanceEdit/gpa';
-import Dragger from 'antd/lib/upload/Dragger';
-import { InboxOutlined, CloseOutlined } from '@ant-design/icons';
-import Swal from 'sweetalert2';
-import UpdateProfile from './updateProfile';
-import { RFC_2822 } from 'moment';
+} from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import GpaEdit from "./studentPerformanceEdit/gpa";
+import Dragger from "antd/lib/upload/Dragger";
+import { InboxOutlined, CloseOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
+import UpdateProfile from "./updateProfile";
+import { RFC_2822 } from "moment";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -118,28 +107,28 @@ function Profile() {
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
+    reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error("You can only upload JPG/PNG file!");
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error("Image must smaller than 2MB!");
     }
     return isJpgOrPng && isLt2M;
   };
 
   const handleChange = (info) => {
-    if (info.file.status === 'uploading') {
+    if (info.file.status === "uploading") {
       setLoading(false);
       return;
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       getBase64(info.file.originFileObj, (imageUrl) => {
         setLoading(false);
         setImageURL(false);
@@ -154,7 +143,7 @@ function Profile() {
 
   const dummyRequest = ({ file, onSuccess }) => {
     setTimeout(() => {
-      onSuccess('ok');
+      onSuccess("ok");
     }, 0);
   };
 
@@ -167,21 +156,21 @@ function Profile() {
       Swal.fire({
         title: `updated successfully`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
     } else if (updateStuStatus === false) {
       Swal.fire({
         title: `error when updating`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
     }
 
@@ -193,21 +182,21 @@ function Profile() {
       Swal.fire({
         title: `deleted successfully`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
     } else if (deleteStuStatus === false) {
       Swal.fire({
         title: `error when deleting`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
     }
 
@@ -218,22 +207,22 @@ function Profile() {
       Swal.fire({
         title: `Profile picture has been updated successfully`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
       makeDeafultProfiles(dispatch);
     } else if (updateProfilePicStatus === false) {
       Swal.fire({
         title: `Error while updating profile picture`,
         // text: "You won't be able to revert this!",
-        icon: 'error',
+        icon: "error",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
       makeDeafultProfiles(dispatch);
     }
@@ -244,22 +233,22 @@ function Profile() {
       Swal.fire({
         title: `Profile Information has been updated successfully`,
         // text: "You won't be able to revert this!",
-        icon: 'success',
+        icon: "success",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
       makeDeafultProfiles(dispatch);
     } else if (updateProfileInfoStatus === false) {
       Swal.fire({
         title: `Error while updating profile Information`,
         // text: "You won't be able to revert this!",
-        icon: 'error',
+        icon: "error",
         showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "OK",
       });
       makeDeafultProfiles(dispatch);
     }
@@ -287,60 +276,60 @@ function Profile() {
 
   const uploadButton = (
     <div className="ant-upload-text font-semibold text-dark">
-      {<VerticalAlignTopOutlined style={{ width: 20, color: '#000' }} />}
+      {<VerticalAlignTopOutlined style={{ width: 20, color: "#000" }} />}
       <div>Upload New Project</div>
     </div>
   );
 
   const data = [
     {
-      title: 'Sophie B.',
+      title: "Sophie B.",
       avatar: convesionImg,
-      description: 'Hi! I need more information…',
+      description: "Hi! I need more information…",
     },
     {
-      title: 'Anne Marie',
+      title: "Anne Marie",
       avatar: convesionImg2,
-      description: 'Awesome work, can you…',
+      description: "Awesome work, can you…",
     },
     {
-      title: 'Ivan',
+      title: "Ivan",
       avatar: convesionImg3,
-      description: 'About files I can…',
+      description: "About files I can…",
     },
     {
-      title: 'Peterson',
+      title: "Peterson",
       avatar: convesionImg4,
-      description: 'Have a great afternoon…',
+      description: "Have a great afternoon…",
     },
     {
-      title: 'Nick Daniel',
+      title: "Nick Daniel",
       avatar: convesionImg5,
-      description: 'Hi! I need more information…',
+      description: "Hi! I need more information…",
     },
   ];
 
   const project = [
     {
       img: project1,
-      titlesub: 'Project #1',
-      title: 'Modern',
+      titlesub: "Project #1",
+      title: "Modern",
       disciption:
-        'As Uber works through a huge amount of internal management turmoil.',
+        "As Uber works through a huge amount of internal management turmoil.",
     },
     {
       img: project2,
-      titlesub: 'Project #2',
-      title: 'Scandinavian',
+      titlesub: "Project #2",
+      title: "Scandinavian",
       disciption:
-        'Music is something that every person has his or her own specific opinion about.',
+        "Music is something that every person has his or her own specific opinion about.",
     },
     {
       img: project3,
-      titlesub: 'Project #3',
-      title: 'Minimalist',
+      titlesub: "Project #3",
+      title: "Minimalist",
       disciption:
-        'Different people have different taste, and various types of music, Zimbali Resort',
+        "Different people have different taste, and various types of music, Zimbali Resort",
     },
   ];
 
@@ -352,11 +341,11 @@ function Profile() {
   useEffect(() => {
     if (profileStatus === true) {
       if (profileData?.image) {
-        console.log(profileData?.image?.data, 'kkk');
+        console.log(profileData?.image?.data, "kkk");
         const buffer = Buffer.from(profileData?.image?.data);
-        console.log(buffer, 'kkk');
+        console.log(buffer, "kkk");
         const blob = new Blob([buffer], {
-          type: 'image/jpeg',
+          type: "image/jpeg",
         });
 
         const imageUrl = URL.createObjectURL(blob);
@@ -393,12 +382,12 @@ function Profile() {
     <>
       <div
         className="profile-nav-bg"
-        style={{ backgroundImage: 'url(' + BgProfile + ')' }}
+        style={{ backgroundImage: "url(" + BgProfile + ")" }}
       ></div>
 
       <Card
         className="card-profile-head"
-        bodyStyle={{ display: 'none' }}
+        bodyStyle={{ display: "none" }}
         title={
           <Row justify="space-between" align="middle" gutter={[24, 0]}>
             <Col span={24} md={12} className="col-info">
@@ -413,27 +402,27 @@ function Profile() {
                   <h4 className="font-semibold m-0">
                     {profileDataValue?.first_name} {profileDataValue?.last_name}
                   </h4>
-                  <p>{profileDataValue?.role?.role_name || ''}</p>
+                  <p>{profileDataValue?.role?.role_name || ""}</p>
                   {profileDataValue.rank &&
-                  profileDataValue?.role?.role_code === 'STUDENT' &&
+                  profileDataValue?.role?.role_code === "STUDENT" &&
                   [1, 2, 3].includes(profileDataValue.rank) ? (
-                    <p>Rank:{profileDataValue?.rank || ''}</p>
+                    <p>Rank:{profileDataValue?.rank || ""}</p>
                   ) : (
                     <></>
                   )}
 
                   {profileDataValue.rank &&
-                  profileDataValue?.role?.role_code === 'STUDENT' &&
+                  profileDataValue?.role?.role_code === "STUDENT" &&
                   [1, 2, 3].includes(profileDataValue.rank) ? (
                     <p>
                       Badge:
                       {profileDataValue?.rank === 1
-                        ? 'Gold'
+                        ? "Gold"
                         : profileDataValue?.rank === 2
-                        ? 'Silver'
+                        ? "Silver"
                         : profileDataValue?.rank === 3
-                        ? 'Bronze'
-                        : ''}
+                        ? "Bronze"
+                        : ""}
                     </p>
                   ) : (
                     <></>
@@ -542,17 +531,17 @@ function Profile() {
                 {profileDataValue?.first_name} {profileDataValue?.last_name}
               </Descriptions.Item>
               <Descriptions.Item label="Phone numbers" span={3}>
-                {profileDataValue?.phone_num1}{' '}
-                {profileDataValue?.phone_num2 || ''}
+                {profileDataValue?.phone_num1}{" "}
+                {profileDataValue?.phone_num2 || ""}
               </Descriptions.Item>
               <Descriptions.Item label="Email" span={3}>
-                {profileDataValue?.email || ''}
+                {profileDataValue?.email || ""}
               </Descriptions.Item>
               <Descriptions.Item label="Department" span={3}>
-                {profileDataValue?.department || ''}
+                {profileDataValue?.department || ""}
               </Descriptions.Item>
               <Descriptions.Item label="University" span={3}>
-                {profileDataValue?.university || ''}
+                {profileDataValue?.university || ""}
               </Descriptions.Item>
 
               {profileDataValue?.year && (
@@ -626,11 +615,11 @@ function Profile() {
                   <Descriptions
                     title={`Your Current GPA is ${profileDataValue.gpas[0]?.value}`}
                     span={3}
-                  ></Descriptions>{' '}
+                  ></Descriptions>{" "}
                 </Col>
                 <Col lg={6}>
                   <Button
-                    style={{ height: '35px' }}
+                    style={{ height: "35px" }}
                     onClick={() => setGpaModal(true)}
                   >
                     Edit
@@ -810,7 +799,7 @@ function Profile() {
           setSelectedClub([]);
         }}
       >
-        {' '}
+        {" "}
         <Card bordered={false} className="header-solid mb-24">
           <Row gutter={[24, 24]}>
             {/* {project.map((p, index) => (
@@ -843,31 +832,31 @@ function Profile() {
             {selectedClub &&
               selectedClub.map((p, index) => (
                 <Col span={24} md={24} xl={8} key={index}>
-                  {console.log(p, 'test')}
+                  {console.log(p, "test")}
 
                   <Card bordered={false} className="card-project">
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Club Name
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '90px' }}></div>
+                            <div style={{ width: "90px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <Input
                               onChange={(e) => {
                                 {
@@ -877,7 +866,7 @@ function Profile() {
                                 }
                               }}
                               value={p?.club_name}
-                              style={{ width: '300px' }}
+                              style={{ width: "300px" }}
                               // onChange={(e) => setName(e.target.value)}
                               // value={des}
                               //   style={{ height: '150px' }}
@@ -887,32 +876,32 @@ function Profile() {
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Position
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <Select
-                              style={{ width: '300px' }}
+                              style={{ width: "300px" }}
                               defaultValue="member"
                               onChange={(e) => {
                                 {
@@ -923,23 +912,23 @@ function Profile() {
                               }}
                               value={p?.club_level}
                               options={[
-                                { value: 'president', label: 'president' },
-                                { value: 'lead', label: 'lead' },
-                                { value: 'member', label: 'member' },
+                                { value: "president", label: "president" },
+                                { value: "lead", label: "lead" },
+                                { value: "member", label: "member" },
                               ]}
                             />
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '40px' }}></div>
+                            <div style={{ width: "40px" }}></div>
                           </td>
                           {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -989,20 +978,20 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
                             {profileDataValue &&
                               selectedClub &&
                               !(
-                                selectedClub[index].club_name == '' ||
-                                selectedClub[index].club_level == ''
+                                selectedClub[index].club_name == "" ||
+                                selectedClub[index].club_level == ""
                               ) && (
-                                <td style={{ textAlign: 'left' }}>
+                                <td style={{ textAlign: "left" }}>
                                   <Button
                                     onClick={(e) => {
                                       updateStu(
                                         {
-                                          type: 'CLUBS',
+                                          type: "CLUBS",
                                           club_level: p.club_level,
                                           club_name: p.club_name,
                                           id: p.id,
@@ -1012,10 +1001,10 @@ function Profile() {
                                     }}
                                     style={{
                                       background:
-                                        'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                      border: 'none',
-                                      color: 'white',
-                                      width: '150px',
+                                        "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                      border: "none",
+                                      color: "white",
+                                      width: "150px",
                                     }}
                                   >
                                     Update
@@ -1080,123 +1069,123 @@ function Profile() {
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Name
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '90px' }}></div>
+                            <div style={{ width: "90px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.event_name}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Level
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '100px' }}></div>
+                            <div style={{ width: "100px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.level}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               position
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.position}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '30px' }}></div>
+                            <div style={{ width: "30px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Cardinality
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.cardinality}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '40px' }}></div>
+                            <div style={{ width: "40px" }}></div>
                           </td>
                           {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -1246,10 +1235,10 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <Button
                                 onClick={(e) => {
                                   let events = profileData?.events
@@ -1264,10 +1253,10 @@ function Profile() {
                                 }}
                                 style={{
                                   background:
-                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                  border: 'none',
-                                  color: 'white',
-                                  width: '100px',
+                                    "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                  border: "none",
+                                  color: "white",
+                                  width: "100px",
                                 }}
                               >
                                 Update
@@ -1275,14 +1264,14 @@ function Profile() {
                             </td>
 
                             <td>
-                              <div style={{ width: '20px' }}></div>
+                              <div style={{ width: "20px" }}></div>
                             </td>
                             <td>
                               <Button
                                 onClick={() =>
                                   deleteStu(
                                     {
-                                      type: 'EVENT',
+                                      type: "EVENT",
                                       id: p.id,
                                     },
                                     dispatch
@@ -1361,27 +1350,27 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Name
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '90px' }}></div>
+                              <div style={{ width: "90px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Input
                                 value={p?.event_name}
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 onChange={(e) => {
                                   let clubDataVal = [...selectedEventData];
                                   clubDataVal[index].event_name =
@@ -1396,32 +1385,32 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Level
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '100px' }}></div>
+                              <div style={{ width: "100px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 defaultValue="university"
                                 value={p?.level}
                                 onChange={(e) => {
@@ -1433,16 +1422,16 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: 'university',
-                                    label: 'university level',
+                                    value: "university",
+                                    label: "university level",
                                   },
                                   {
-                                    value: 'national',
-                                    label: 'national level',
+                                    value: "national",
+                                    label: "national level",
                                   },
                                   {
-                                    value: 'international',
-                                    label: 'international level',
+                                    value: "international",
+                                    label: "international level",
                                   },
                                 ]}
                               />
@@ -1450,33 +1439,33 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 position
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '80px' }}></div>
+                              <div style={{ width: "80px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
                                 value={p?.position}
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 defaultValue="1"
                                 onChange={(e) => {
                                   {
@@ -1487,17 +1476,17 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: '1',
-                                    label: '1',
+                                    value: "1",
+                                    label: "1",
                                   },
-                                  { value: '2', label: '2' },
+                                  { value: "2", label: "2" },
                                   {
-                                    value: '3',
-                                    label: '3',
+                                    value: "3",
+                                    label: "3",
                                   },
                                   {
-                                    value: 'part',
-                                    label: 'part',
+                                    value: "part",
+                                    label: "part",
                                   },
                                 ]}
                               />
@@ -1505,32 +1494,32 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '30px' }}></div>
+                              <div style={{ width: "30px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Cardinality
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '80px' }}></div>
+                              <div style={{ width: "80px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 value={p?.cardinality}
                                 defaultValue="1"
                                 onChange={(e) => {
@@ -1542,13 +1531,13 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: 'leader',
-                                    label: 'leader',
+                                    value: "leader",
+                                    label: "leader",
                                   },
-                                  { value: 'member', label: 'member' },
+                                  { value: "member", label: "member" },
                                   {
-                                    value: 'individual',
-                                    label: 'individual',
+                                    value: "individual",
+                                    label: "individual",
                                   },
                                 ]}
                               />
@@ -1557,12 +1546,12 @@ function Profile() {
                         </tbody>
                       </table>
 
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '40px' }}></div>
+                              <div style={{ width: "40px" }}></div>
                             </td>
                             {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -1612,16 +1601,16 @@ function Profile() {
                           <tbody>
                             <tr>
                               <td>
-                                <div style={{ width: '120px' }}></div>
+                                <div style={{ width: "120px" }}></div>
                               </td>
-                              {selectedEventData[index].event_name != '' &&
-                                selectedEventData[index].level != '' && (
-                                  <td style={{ textAlign: 'left' }}>
+                              {selectedEventData[index].event_name != "" &&
+                                selectedEventData[index].level != "" && (
+                                  <td style={{ textAlign: "left" }}>
                                     <Button
                                       onClick={(e) => {
                                         updateStu(
                                           {
-                                            type: 'EVENT',
+                                            type: "EVENT",
                                             event_name: p.event_name,
                                             level: p.level,
                                             position: p.position,
@@ -1633,10 +1622,10 @@ function Profile() {
                                       }}
                                       style={{
                                         background:
-                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                        border: 'none',
-                                        color: 'white',
-                                        width: '100px',
+                                          "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                        border: "none",
+                                        color: "white",
+                                        width: "100px",
                                       }}
                                     >
                                       Update
@@ -1699,73 +1688,73 @@ function Profile() {
             {clubData &&
               clubData.map((p, index) => (
                 <Col span={24} md={24} xl={8} key={index}>
-                  {console.log(p, 'test')}
+                  {console.log(p, "test")}
 
                   <Card bordered={false} className="card-project">
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Club Name
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '90px' }}></div>
+                            <div style={{ width: "90px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p.club_name}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Position
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p.club_level}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '40px' }}></div>
+                            <div style={{ width: "40px" }}></div>
                           </td>
                           {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -1819,10 +1808,10 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <Button
                                 onClick={(e) => {
                                   let clubArray = profileData?.clubs
@@ -1833,17 +1822,17 @@ function Profile() {
                                   let arr = clubArray[index];
                                   let arrayval = [];
                                   arrayval.push(arr);
-                                  console.log(arrayval, 'arr');
+                                  console.log(arrayval, "arr");
                                   setSelectedClub(arrayval);
 
                                   setClubModal(true);
                                 }}
                                 style={{
                                   background:
-                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                  border: 'none',
-                                  color: 'white',
-                                  width: '100px',
+                                    "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                  border: "none",
+                                  color: "white",
+                                  width: "100px",
                                 }}
                               >
                                 Update
@@ -1851,14 +1840,14 @@ function Profile() {
                             </td>
 
                             <td>
-                              <div style={{ width: '20px' }}></div>
+                              <div style={{ width: "20px" }}></div>
                             </td>
                             <td>
                               <Button
                                 onClick={() =>
                                   deleteStu(
                                     {
-                                      type: 'CLUBS',
+                                      type: "CLUBS",
                                       id: p.id,
                                     },
                                     dispatch
@@ -1928,123 +1917,123 @@ function Profile() {
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Name
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '90px' }}></div>
+                            <div style={{ width: "90px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.sport_name}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Level
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '100px' }}></div>
+                            <div style={{ width: "100px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.level}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               position
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.position}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '30px' }}></div>
+                            <div style={{ width: "30px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Cardinality
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.cardinality}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '40px' }}></div>
+                            <div style={{ width: "40px" }}></div>
                           </td>
                           {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -2094,10 +2083,10 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <Button
                                 onClick={(e) => {
                                   let arry = profileData?.sports
@@ -2105,34 +2094,34 @@ function Profile() {
                                         ...club,
                                       }))
                                     : [];
-                                  console.log(arry[index], 'll');
+                                  console.log(arry[index], "ll");
 
                                   let arrNew = [];
                                   arrNew.push(arry[index]);
-                                  console.log(arrNew, 'll');
+                                  console.log(arrNew, "ll");
                                   setSelectedSport(arrNew);
                                   setSportModal(true);
                                 }}
                                 style={{
                                   background:
-                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                  border: 'none',
-                                  color: 'white',
-                                  width: '100px',
+                                    "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                  border: "none",
+                                  color: "white",
+                                  width: "100px",
                                 }}
                               >
                                 Update
                               </Button>
                             </td>
                             <td>
-                              <div style={{ width: '20px' }}></div>
+                              <div style={{ width: "20px" }}></div>
                             </td>
                             <td>
                               <Button
                                 onClick={() =>
                                   deleteStu(
                                     {
-                                      type: 'SPORT',
+                                      type: "SPORT",
                                       id: p.id,
                                     },
                                     dispatch
@@ -2211,27 +2200,27 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Name
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '90px' }}></div>
+                              <div style={{ width: "90px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Input
                                 value={p?.sport_name}
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 onChange={(e) => {
                                   {
                                     let clubDataVal = [...selectedSportData];
@@ -2249,32 +2238,32 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Level
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '100px' }}></div>
+                              <div style={{ width: "100px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 defaultValue="university"
                                 value={p?.level}
                                 onChange={(e) => {
@@ -2287,16 +2276,16 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: 'university',
-                                    label: 'university level',
+                                    value: "university",
+                                    label: "university level",
                                   },
                                   {
-                                    value: 'national',
-                                    label: 'national level',
+                                    value: "national",
+                                    label: "national level",
                                   },
                                   {
-                                    value: 'international',
-                                    label: 'international level',
+                                    value: "international",
+                                    label: "international level",
                                   },
                                 ]}
                               />
@@ -2304,33 +2293,33 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 position
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '80px' }}></div>
+                              <div style={{ width: "80px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
                                 value={p?.position}
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 defaultValue="1"
                                 onChange={(e) => {
                                   {
@@ -2342,17 +2331,17 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: '1',
-                                    label: '1',
+                                    value: "1",
+                                    label: "1",
                                   },
-                                  { value: '2', label: '2' },
+                                  { value: "2", label: "2" },
                                   {
-                                    value: '3',
-                                    label: '3',
+                                    value: "3",
+                                    label: "3",
                                   },
                                   {
-                                    value: 'part',
-                                    label: 'part',
+                                    value: "part",
+                                    label: "part",
                                   },
                                 ]}
                               />
@@ -2360,32 +2349,32 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '30px' }}></div>
+                              <div style={{ width: "30px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Cardinality
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '80px' }}></div>
+                              <div style={{ width: "80px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 value={p?.cardinality}
                                 defaultValue="1"
                                 onChange={(e) => {
@@ -2398,13 +2387,13 @@ function Profile() {
                                 }}
                                 options={[
                                   {
-                                    value: 'leader',
-                                    label: 'leader',
+                                    value: "leader",
+                                    label: "leader",
                                   },
-                                  { value: 'member', label: 'member' },
+                                  { value: "member", label: "member" },
                                   {
-                                    value: 'individual',
-                                    label: 'individual',
+                                    value: "individual",
+                                    label: "individual",
                                   },
                                 ]}
                               />
@@ -2413,12 +2402,12 @@ function Profile() {
                         </tbody>
                       </table>
 
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '40px' }}></div>
+                              <div style={{ width: "40px" }}></div>
                             </td>
                             {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -2468,17 +2457,17 @@ function Profile() {
                           <tbody>
                             <tr>
                               <td>
-                                <div style={{ width: '150px' }}></div>
+                                <div style={{ width: "150px" }}></div>
                               </td>
 
-                              {selectedSportData[index].sport_name != '' &&
-                                selectedSportData[index].level != '' && (
-                                  <td style={{ textAlign: 'left' }}>
+                              {selectedSportData[index].sport_name != "" &&
+                                selectedSportData[index].level != "" && (
+                                  <td style={{ textAlign: "left" }}>
                                     <Button
                                       onClick={(e) => {
                                         updateStu(
                                           {
-                                            type: 'SPORT',
+                                            type: "SPORT",
                                             event_name: p.sport_name,
                                             level: p.level,
                                             position: p.position,
@@ -2490,10 +2479,10 @@ function Profile() {
                                       }}
                                       style={{
                                         background:
-                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                        border: 'none',
-                                        color: 'white',
-                                        width: '100px',
+                                          "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                        border: "none",
+                                        color: "white",
+                                        width: "100px",
                                       }}
                                     >
                                       Update
@@ -2556,73 +2545,73 @@ function Profile() {
             {selfLearningData &&
               selfLearningData.map((p, index) => (
                 <Col span={24} md={24} xl={8} key={index}>
-                  {console.log(p, 'test')}
+                  {console.log(p, "test")}
 
                   <Card bordered={false} className="card-project">
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               Course Name
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '90px' }}></div>
+                            <div style={{ width: "90px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.course_name}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '50px' }}></div>
+                            <div style={{ width: "50px" }}></div>
                           </td>
-                          <td style={{ textAlign: 'left' }}>
+                          <td style={{ textAlign: "left" }}>
                             <span
                               style={{
-                                color: '#070C83',
+                                color: "#070C83",
                                 fontWeight: 600,
-                                fontSize: '15px',
+                                fontSize: "15px",
                               }}
                             >
                               level
                             </span>
                           </td>
                           <td>
-                            <div style={{ width: '80px' }}></div>
+                            <div style={{ width: "80px" }}></div>
                           </td>
 
-                          <td style={{ textAlign: 'left', width: '600px' }}>
+                          <td style={{ textAlign: "left", width: "600px" }}>
                             <span>{p?.course_level}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
 
-                    <div style={{ height: '20px' }}></div>
+                    <div style={{ height: "20px" }}></div>
                     <table>
                       <tbody>
                         <tr>
                           <td>
-                            <div style={{ width: '40px' }}></div>
+                            <div style={{ width: "40px" }}></div>
                           </td>
                           {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -2672,10 +2661,10 @@ function Profile() {
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <Button
                                 onClick={(e) => {
                                   let selfLearning = profileData?.selflearnings
@@ -2691,10 +2680,10 @@ function Profile() {
                                 }}
                                 style={{
                                   background:
-                                    'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                  border: 'none',
-                                  color: 'white',
-                                  width: '100px',
+                                    "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                  border: "none",
+                                  color: "white",
+                                  width: "100px",
                                 }}
                               >
                                 Update
@@ -2702,14 +2691,14 @@ function Profile() {
                             </td>
 
                             <td>
-                              <div style={{ width: '20px' }}></div>
+                              <div style={{ width: "20px" }}></div>
                             </td>
                             <td>
                               <Button
                                 onClick={() =>
                                   deleteStu(
                                     {
-                                      type: 'SELF_LEARNINGS',
+                                      type: "SELF_LEARNINGS",
                                       id: p.id,
                                     },
                                     dispatch
@@ -2783,31 +2772,31 @@ function Profile() {
               {SelectedSelfLearning &&
                 SelectedSelfLearning.map((p, index) => (
                   <Col span={24} md={24} xl={8} key={index}>
-                    {console.log(p, 'test')}
+                    {console.log(p, "test")}
 
                     <Card bordered={false} className="card-project">
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Course Name
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '90px' }}></div>
+                              <div style={{ width: "90px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Input
                                 onChange={(e) => {
                                   {
@@ -2818,7 +2807,7 @@ function Profile() {
                                   }
                                 }}
                                 value={p?.course_name}
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 // onChange={(e) => setName(e.target.value)}
                                 // value={des}
                                 //   style={{ height: '150px' }}
@@ -2828,32 +2817,32 @@ function Profile() {
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '50px' }}></div>
+                              <div style={{ width: "50px" }}></div>
                             </td>
-                            <td style={{ textAlign: 'left' }}>
+                            <td style={{ textAlign: "left" }}>
                               <span
                                 style={{
-                                  color: '#070C83',
+                                  color: "#070C83",
                                   fontWeight: 600,
-                                  fontSize: '15px',
+                                  fontSize: "15px",
                                 }}
                               >
                                 Position
                               </span>
                             </td>
                             <td>
-                              <div style={{ width: '80px' }}></div>
+                              <div style={{ width: "80px" }}></div>
                             </td>
 
-                            <td style={{ textAlign: 'left', width: '600px' }}>
+                            <td style={{ textAlign: "left", width: "600px" }}>
                               <Select
-                                style={{ width: '300px' }}
+                                style={{ width: "300px" }}
                                 defaultValue="member"
                                 onChange={(e) => {
                                   {
@@ -2864,26 +2853,26 @@ function Profile() {
                                 }}
                                 value={p?.course_level}
                                 options={[
-                                  { value: 'beginner', label: 'beginner' },
+                                  { value: "beginner", label: "beginner" },
                                   {
-                                    value: 'intermediate',
-                                    label: 'intermediate',
+                                    value: "intermediate",
+                                    label: "intermediate",
                                   },
-                                  { value: 'expert', label: 'expert' },
+                                  { value: "expert", label: "expert" },
                                 ]}
                               />
                             </td>
                           </tr>
                         </tbody>
                       </table>
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
 
-                      <div style={{ height: '20px' }}></div>
+                      <div style={{ height: "20px" }}></div>
                       <table>
                         <tbody>
                           <tr>
                             <td>
-                              <div style={{ width: '40px' }}></div>
+                              <div style={{ width: "40px" }}></div>
                             </td>
                             {/* <td style={{ textAlign: 'left' }}>
                             <span
@@ -2933,17 +2922,17 @@ function Profile() {
                           <tbody>
                             <tr>
                               <td>
-                                <div style={{ width: '150px' }}></div>
+                                <div style={{ width: "150px" }}></div>
                               </td>
-                              {SelectedSelfLearning[index].course_name != '' &&
+                              {SelectedSelfLearning[index].course_name != "" &&
                                 SelectedSelfLearning[index].course_level !=
-                                  '' && (
-                                  <td style={{ textAlign: 'left' }}>
+                                  "" && (
+                                  <td style={{ textAlign: "left" }}>
                                     <Button
                                       onClick={(e) => {
                                         updateStu(
                                           {
-                                            type: 'SELF_LEARNINGS',
+                                            type: "SELF_LEARNINGS",
                                             course_level: p.course_level,
                                             course_name: p.course_name,
                                             id: p.id,
@@ -2953,10 +2942,10 @@ function Profile() {
                                       }}
                                       style={{
                                         background:
-                                          'linear-gradient(to right, #000AF3, #69D0F0)', // Replace with your desired gradient colors
-                                        border: 'none',
-                                        color: 'white',
-                                        width: '100px',
+                                          "linear-gradient(to right, #000AF3, #69D0F0)", // Replace with your desired gradient colors
+                                        border: "none",
+                                        color: "white",
+                                        width: "100px",
                                       }}
                                     >
                                       Update
@@ -2981,7 +2970,7 @@ function Profile() {
         onOk={() => {
           if (fileVal.length) {
             let formData = new FormData();
-            formData.append('file', fileVal[0]?.originFileObj);
+            formData.append("file", fileVal[0]?.originFileObj);
             updateProfilePicDetails(formData, dispatch);
             setUpdateProfilePicStatus(false);
           } else {
@@ -3005,9 +2994,9 @@ function Profile() {
           <p
             className="ant-upload-text"
             style={{
-              color: '#070C83',
+              color: "#070C83",
               fontWeight: 600,
-              fontSize: '10px',
+              fontSize: "10px",
             }}
           >
             Click or drag file to this area to upload
@@ -3015,7 +3004,7 @@ function Profile() {
         </Dragger>
 
         {picErrorStatus && (
-          <span style={{ color: 'red', marginTop: '10px' }}>
+          <span style={{ color: "red", marginTop: "10px" }}>
             please select the image
           </span>
         )}

@@ -1,24 +1,12 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // import { useState } from "react";
-import { Menu, Button } from 'antd';
-import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/images/logo.png';
-import { useSelector } from 'react-redux';
+import { Menu, Button } from "antd";
+import { NavLink, useLocation } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+import { useSelector } from "react-redux";
 
 function Sidenav({ color }) {
   const { pathname } = useLocation();
-  const page = pathname.replace('/', '');
+  const page = pathname.replace("/", "");
   const role = useSelector((state) => state?.commonReducer?.roleCode);
 
   const dashboard = [
@@ -274,7 +262,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === 'dashboard' ? color : '',
+                background: page === "dashboard" ? color : "",
               }}
             >
               {dashboard}
@@ -283,13 +271,13 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item>
 
-        {role === 'CAREER_GUIDANCE_OFFICER' ? (
+        {role === "CAREER_GUIDANCE_OFFICER" ? (
           <Menu.Item key="1">
             <NavLink to="/checkPerformance">
               <span
                 className="icon"
                 style={{
-                  background: page === 'dashboard' ? color : '',
+                  background: page === "dashboard" ? color : "",
                 }}
               >
                 {Analyze}
@@ -314,13 +302,13 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item> */}
 
-        {role === 'CAREER_GUIDANCE_OFFICER' ? (
+        {role === "CAREER_GUIDANCE_OFFICER" ? (
           <Menu.Item key="7">
             <NavLink to="/advertisement">
               <span
                 className="icon"
                 style={{
-                  background: page === 'tables' ? color : '',
+                  background: page === "tables" ? color : "",
                 }}
               >
                 {performance}
@@ -332,13 +320,13 @@ function Sidenav({ color }) {
           <></>
         )}
 
-        {role === 'STUDENT' ? (
+        {role === "STUDENT" ? (
           <Menu.Item key="8">
             <NavLink to="/performance">
               <span
                 className="icon"
                 style={{
-                  background: page === 'tables' ? color : '',
+                  background: page === "tables" ? color : "",
                 }}
               >
                 {performance}
@@ -354,7 +342,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === 'tables' ? color : '',
+                background: page === "tables" ? color : "",
               }}
             >
               {analyzeStudents}
@@ -396,7 +384,7 @@ function Sidenav({ color }) {
             <span
               className="icon"
               style={{
-                background: page === 'profile' ? color : '',
+                background: page === "profile" ? color : "",
               }}
             >
               {profile}

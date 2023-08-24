@@ -1,15 +1,4 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   Card,
@@ -23,42 +12,42 @@ import {
   Button,
   Timeline,
   Radio,
-} from 'antd';
+} from "antd";
 import {
   ToTopOutlined,
   MenuUnfoldOutlined,
   RightOutlined,
-} from '@ant-design/icons';
-import Paragraph from 'antd/lib/typography/Paragraph';
+} from "@ant-design/icons";
+import Paragraph from "antd/lib/typography/Paragraph";
 
-import Echart from '../components/chart/EChart';
-import LineChart from '../components/chart/LineChart';
+import Echart from "../components/chart/EChart";
+import LineChart from "../components/chart/LineChart";
 
-import ava1 from '../assets/images/logo-shopify.svg';
-import ava2 from '../assets/images/logo-atlassian.svg';
-import ava3 from '../assets/images/logo-slack.svg';
-import ava4 from '../assets/images/logo-spotify.svg';
-import ava5 from '../assets/images/logo-jira.svg';
-import ava6 from '../assets/images/logo-invision.svg';
-import team1 from '../assets/images/team-1.jpg';
-import team2 from '../assets/images/team-2.jpg';
-import team3 from '../assets/images/team-3.jpg';
-import team4 from '../assets/images/team-4.jpg';
-import card from '../assets/images/info-card-1.jpg';
+import ava1 from "../assets/images/logo-shopify.svg";
+import ava2 from "../assets/images/logo-atlassian.svg";
+import ava3 from "../assets/images/logo-slack.svg";
+import ava4 from "../assets/images/logo-spotify.svg";
+import ava5 from "../assets/images/logo-jira.svg";
+import ava6 from "../assets/images/logo-invision.svg";
+import team1 from "../assets/images/team-1.jpg";
+import team2 from "../assets/images/team-2.jpg";
+import team3 from "../assets/images/team-3.jpg";
+import team4 from "../assets/images/team-4.jpg";
+import card from "../assets/images/info-card-1.jpg";
 import {
   Datepicker,
   DatepickerEvent,
-} from '@meinefinsternis/react-horizontal-date-picker';
-import { enUS } from 'date-fns/locale';
-import DatePicker from 'react-horizontal-datepicker';
-import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAdsByDate } from '../redux/action';
-import moments from 'moment-timezone';
-import ReactHorizontalDatePicker from 'react-horizontal-strip-datepicker';
-import 'react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css';
+} from "@meinefinsternis/react-horizontal-date-picker";
+import { enUS } from "date-fns/locale";
+import DatePicker from "react-horizontal-datepicker";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdsByDate } from "../redux/action";
+import moments from "moment-timezone";
+import ReactHorizontalDatePicker from "react-horizontal-strip-datepicker";
+import "react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css";
 
-const targetTimezone = 'Asia/Kolkata'; // Replace with your desired timezone
+const targetTimezone = "Asia/Kolkata"; // Replace with your desired timezone
 
 function Home() {
   const { Title, Text } = Typography;
@@ -165,40 +154,40 @@ function Home() {
   ];
   const count = [
     {
-      today: 'Today’s Sales',
-      title: '$53,000',
-      persent: '+30%',
+      today: "Today’s Sales",
+      title: "$53,000",
+      persent: "+30%",
       icon: dollor,
-      bnb: 'bnb2',
+      bnb: "bnb2",
     },
     {
-      today: 'Today’s Users',
-      title: '3,200',
-      persent: '+20%',
+      today: "Today’s Users",
+      title: "3,200",
+      persent: "+20%",
       icon: profile,
-      bnb: 'bnb2',
+      bnb: "bnb2",
     },
     {
-      today: 'New Clients',
-      title: '+1,200',
-      persent: '-20%',
+      today: "New Clients",
+      title: "+1,200",
+      persent: "-20%",
       icon: heart,
-      bnb: 'redtext',
+      bnb: "redtext",
     },
     {
-      today: 'New Orders',
-      title: '$13,200',
-      persent: '10%',
+      today: "New Orders",
+      title: "$13,200",
+      persent: "10%",
       icon: cart,
-      bnb: 'bnb2',
+      bnb: "bnb2",
     },
   ];
 
   const list = [
     {
       img: ava1,
-      Title: 'Soft UI Shopify Version',
-      bud: '$14,000',
+      Title: "Soft UI Shopify Version",
+      bud: "$14,000",
       progress: <Progress percent={60} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -219,8 +208,8 @@ function Home() {
     },
     {
       img: ava2,
-      Title: 'Progress Track',
-      bud: '$3,000',
+      Title: "Progress Track",
+      bud: "$3,000",
       progress: <Progress percent={10} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -235,8 +224,8 @@ function Home() {
     },
     {
       img: ava3,
-      Title: 'Fix Platform Errors',
-      bud: 'Not Set',
+      Title: "Fix Platform Errors",
+      bud: "Not Set",
       progress: <Progress percent={100} size="small" status="active" />,
       member: (
         <div className="avatar-group mt-2">
@@ -254,8 +243,8 @@ function Home() {
     },
     {
       img: ava4,
-      Title: 'Launch new Mobile App',
-      bud: '$20,600',
+      Title: "Launch new Mobile App",
+      bud: "$20,600",
       progress: <Progress percent={100} size="small" status="active" />,
       member: (
         <div className="avatar-group mt-2">
@@ -270,8 +259,8 @@ function Home() {
     },
     {
       img: ava5,
-      Title: 'Add the New Landing Page',
-      bud: '$4,000',
+      Title: "Add the New Landing Page",
+      bud: "$4,000",
       progress: <Progress percent={80} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -293,14 +282,14 @@ function Home() {
 
     {
       img: ava6,
-      Title: 'Redesign Online Store',
-      bud: '$2,000',
+      Title: "Redesign Online Store",
+      bud: "$2,000",
       progress: (
         <Progress
           percent={100}
           size="small"
           status="exception"
-          format={() => 'Cancel'}
+          format={() => "Cancel"}
         />
       ),
       member: (
@@ -318,47 +307,47 @@ function Home() {
 
   const timelineList = [
     {
-      title: '$2,400 - Redesign store',
-      time: '09 JUN 7:20 PM',
-      color: 'green',
+      title: "$2,400 - Redesign store",
+      time: "09 JUN 7:20 PM",
+      color: "green",
     },
     {
-      title: 'New order #3654323',
-      time: '08 JUN 12:20 PM',
-      color: 'green',
+      title: "New order #3654323",
+      time: "08 JUN 12:20 PM",
+      color: "green",
     },
     {
-      title: 'Company server payments',
-      time: '04 JUN 3:10 PM',
+      title: "Company server payments",
+      time: "04 JUN 3:10 PM",
     },
     {
-      title: 'New card added for order #4826321',
-      time: '02 JUN 2:45 PM',
+      title: "New card added for order #4826321",
+      time: "02 JUN 2:45 PM",
     },
     {
-      title: 'Unlock folders for development',
-      time: '18 MAY 1:30 PM',
+      title: "Unlock folders for development",
+      time: "18 MAY 1:30 PM",
     },
     {
-      title: 'New order #46282344',
-      time: '14 MAY 3:30 PM',
-      color: 'gray',
+      title: "New order #46282344",
+      time: "14 MAY 3:30 PM",
+      color: "gray",
     },
   ];
 
   const uploadProps = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
     headers: {
-      authorization: 'authorization-text',
+      authorization: "authorization-text",
     },
     onChange(info) {
-      if (info.file.status !== 'uploading') {
+      if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
       }
-      if (info.file.status === 'done') {
+      if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
+      } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
@@ -366,7 +355,7 @@ function Home() {
 
   useEffect(() => {
     if (adByDateStatus) {
-      console.log(adByDateData, 'adByDateData>>');
+      console.log(adByDateData, "adByDateData>>");
       setData(adByDateData);
     } else if (adByDateStatus === false) {
       setData([]);
@@ -379,16 +368,16 @@ function Home() {
   // }, []);
 
   const getSelectDayStr = (val) => {
-    console.log(val, 'sele2');
+    console.log(val, "sele2");
     setSelectedDay(val);
 
     const dateObject = new Date(val);
 
-    const formattedDate = dateObject.toLocaleString('en-US');
-    if (formattedDate !== 'Invalid Date') {
+    const formattedDate = dateObject.toLocaleString("en-US");
+    if (formattedDate !== "Invalid Date") {
       getAdsByDate(formattedDate, dispatch);
     } else {
-      getAdsByDate('', dispatch);
+      getAdsByDate("", dispatch);
     }
   };
 
@@ -420,17 +409,17 @@ function Home() {
                     getSelectedDay={getSelectDayStr}
                     endDate={100}
                     selectDate={new Date(selectedDay)}
-                    labelFormat={'MMMM'}
-                    color={'#374e8c'}
+                    labelFormat={"MMMM"}
+                    color={"#374e8c"}
                   />
-                  <div style={{ height: '30px' }}></div>
+                  <div style={{ height: "30px" }}></div>
                 </Col>
               </Row>
             </Card>
           </Col>
         </Row>
 
-        {console.log(moments(selectedDay).format('YYYY-MM-DD'), 'sele')}
+        {console.log(moments(selectedDay).format("YYYY-MM-DD"), "sele")}
 
         <Row gutter={[24, 0]}>
           <Col md={12} lg={4} xl={4}></Col>
@@ -440,11 +429,11 @@ function Home() {
                 <div>
                   <Title level={5}>Upcoming Events</Title>
 
-                  {selectedDay == 'Invalid Date' ? (
+                  {selectedDay == "Invalid Date" ? (
                     <></>
                   ) : (
                     <Paragraph className="lastweek">
-                      for Date {moment(selectedDay).format('YYYY-MM-DD')}
+                      for Date {moment(selectedDay).format("YYYY-MM-DD")}
                     </Paragraph>
                   )}
                 </div>
@@ -474,10 +463,10 @@ function Home() {
                     <tbody>
                       {data.map((d, index) => (
                         <tr key={index}>
-                          <td>{moment(d.date).format('YYYY-MM-DD')}</td>
+                          <td>{moment(d.date).format("YYYY-MM-DD")}</td>
                           <td>
                             <span className="text-xs font-weight-bold">
-                              {d.time}{' '}
+                              {d.time}{" "}
                             </span>
                           </td>
                           <td>
@@ -498,13 +487,13 @@ function Home() {
                 </div>
               ) : (
                 <>
-                  {' '}
-                  &ensp;&ensp;&ensp;{' '}
+                  {" "}
+                  &ensp;&ensp;&ensp;{" "}
                   <b>
-                    {selectedDay == 'Invalid Date'
-                      ? 'Oops seems like there is no events '
-                      : 'Oops seems like there is no events on' +
-                        moment(selectedDay).format('YYYY-MM-DD')}
+                    {selectedDay == "Invalid Date"
+                      ? "Oops seems like there is no events "
+                      : "Oops seems like there is no events on" +
+                        moment(selectedDay).format("YYYY-MM-DD")}
                   </b>
                 </>
               )}

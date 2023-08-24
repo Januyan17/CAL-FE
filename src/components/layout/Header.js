@@ -1,16 +1,4 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 import {
   Row,
@@ -25,23 +13,23 @@ import {
   Drawer,
   Typography,
   Switch,
-} from 'antd';
+} from "antd";
 
 import {
   SearchOutlined,
   StarOutlined,
   TwitterOutlined,
   FacebookFilled,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
-import { NavLink, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import avtar from '../../assets/images/team-2.jpg';
-import { useDispatch, useSelector } from 'react-redux';
-import jwt from 'jwt-decode';
-import Swal from 'sweetalert2';
-import { signOut } from '../../redux/action';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { NavLink, Link } from "react-router-dom";
+import styled from "styled-components";
+import avtar from "../../assets/images/team-2.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import jwt from "jwt-decode";
+import Swal from "sweetalert2";
+import { signOut } from "../../redux/action";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -152,19 +140,19 @@ const clockicon = [
 
 const data = [
   {
-    title: 'New message from Sophie',
+    title: "New message from Sophie",
     description: <>{clockicon} 2 days ago</>,
 
     avatar: avtar,
   },
   {
-    title: 'New album by Travis Scott',
+    title: "New album by Travis Scott",
     description: <>{clockicon} 2 days ago</>,
 
     avatar: <Avatar shape="square">{wifi}</Avatar>,
   },
   {
-    title: 'Payment completed',
+    title: "Payment completed",
     description: <>{clockicon} 2 days ago</>,
     avatar: <Avatar shape="square">{credit}</Avatar>,
   },
@@ -266,7 +254,7 @@ function Header({
   const { Title, Text } = Typography;
 
   const [visible, setVisible] = useState(false);
-  const [sidenavType, setSidenavType] = useState('transparent');
+  const [sidenavType, setSidenavType] = useState("transparent");
 
   useEffect(() => window.scrollTo(0, 0));
   const history = useHistory();
@@ -278,21 +266,21 @@ function Header({
   );
 
   const tokenDecoded =
-    siginStatusCode === 200 ? jwt(localStorage.getItem('token')) : '';
+    siginStatusCode === 200 ? jwt(localStorage.getItem("token")) : "";
 
   const dispatch = useDispatch();
   const signOutFunc = () => {
     Swal.fire({
-      title: 'Are you want to leave the application ',
+      title: "Are you want to leave the application ",
       // text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.setItem('token', '');
+        localStorage.setItem("token", "");
         localStorage.clear();
         signOut(dispatch);
       }
@@ -317,15 +305,15 @@ function Header({
           <div className="ant-page-header-heading">
             <span
               className="ant-page-header-heading-title"
-              style={{ textTransform: 'capitalize' }}
+              style={{ textTransform: "capitalize" }}
             >
-              {subName.replace('/', '')}
+              {subName.replace("/", "")}
             </span>
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
           <Badge size="small" count={4}>
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={["click"]}>
               <a
                 href="#pablo"
                 className="ant-dropdown-link"
@@ -452,12 +440,12 @@ function Header({
               </div>
             </div>
           </Drawer> */}
-          <div style={{ cursor: 'pointer' }} className="btn-sign-in">
-            <span onClick={() => history.push('/profile')}>{profile}</span>
+          <div style={{ cursor: "pointer" }} className="btn-sign-in">
+            <span onClick={() => history.push("/profile")}>{profile}</span>
             <span onClick={signOutFunc}>Sign out</span>
           </div>
           <span style={{ fontWeight: 600 }}>{`Hey ${
-            tokenDecoded?.sub?.first_name || ''
+            tokenDecoded?.sub?.first_name || ""
           } !`}</span>
           {/* <Input
             className="header-search"
